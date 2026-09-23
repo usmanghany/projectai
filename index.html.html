@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>buy2bm | Premium Tech & Electronics Store</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Top Announcement Bar -->
+    <div class="announcement-bar">
+        <span>⚡ Welcome to buy2bm — Free Shipping Nationwide on All Orders Above $50! ⚡</span>
+    </div>
+
+    <!-- Main Navigation Header -->
+    <header class="top-nav">
+        <div class="logo">
+            <span class="brand-text">buy2bm</span>
+            <span class="sub-text">OFFICIAL STORE</span>
+        </div>
+        
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search gadgets, accessories, power banks...">
+            <button id="searchBtn"><i class="fa fa-search"></i></button>
+        </div>
+
+        <div class="user-actions">
+            <a href="#" class="action-btn"><i class="fa fa-user"></i> <span>Account</span></a>
+            <div class="cart-icon-wrapper" id="cartToggle">
+                <i class="fa fa-shopping-bag"></i>
+                <span class="cart-badge" id="cartCount">0</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sub Navigation Categories Bar -->
+    <nav class="main-nav">
+        <ul>
+            <li class="nav-item active" data-category="all"><a href="#products"><i class="fa fa-border-all"></i> ALL PRODUCTS</a></li>
+            <li class="nav-item" data-category="Chargers"><a href="#products">CHARGERS</a></li>
+            <li class="nav-item" data-category="Audio"><a href="#products">AUDIO DEVICES</a></li>
+            <li class="nav-item" data-category="Power Banks"><a href="#products">POWER BANKS</a></li>
+            <li class="nav-item" data-category="Hubs"><a href="#products">HUBS & ADAPTERS</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Hero Banner -->
+    <section class="hero-section">
+        <div class="hero-banner">
+            <div class="hero-text-content">
+                <span class="hero-brand">buy2bm EXCLUSIVES</span>
+                <h1>UNPLUGGED TECH DEALS</h1>
+                <div class="discount-badge">
+                    <span class="upto">UP TO</span>
+                    <span class="percent">55%</span>
+                    <span class="off">OFF</span>
+                </div>
+                <br>
+                <a href="#products" class="shop-now-btn">SHOP COLLECTION <i class="fa fa-arrow-right"></i></a>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80" alt="buy2bm Featured Headphone">
+            </div>
+        </div>
+
+        <!-- Trust Badges -->
+        <div class="trust-bar">
+            <div class="trust-item">
+                <i class="fa fa-shield-alt"></i>
+                <div>
+                    <strong>6 MONTHS WARRANTY</strong>
+                    <span>Verified Quality Assurance</span>
+                </div>
+            </div>
+            <div class="trust-item">
+                <i class="fa fa-truck-fast"></i>
+                <div>
+                    <strong>EXPRESS SHIPPING</strong>
+                    <span>Fast Delivery Guaranteed</span>
+                </div>
+            </div>
+            <div class="trust-item">
+                <i class="fa fa-headset"></i>
+                <div>
+                    <strong>24/7 SUPPORT</strong>
+                    <span>Dedicated Help Line</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Showcase Grid -->
+    <main class="container products-section" id="products">
+        <h2 class="section-title">Explore Catalog</h2>
+        <div class="product-grid" id="productGrid">
+            <!-- Dynamic JavaScript Product Injection -->
+        </div>
+    </main>
+
+    <!-- Slide-Out Shopping Cart Sidebar -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <aside class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Your Shopping Cart</h3>
+            <button class="close-cart-btn" id="closeCart">&times;</button>
+        </div>
+        <div class="cart-body" id="cartItemsContainer">
+            <!-- Dynamic Cart Items Rendered via JavaScript -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total-row">
+                <span>Total Amount:</span>
+                <strong id="cartTotal">$0.00</strong>
+            </div>
+            <button class="checkout-btn" id="checkoutBtn">PROCEED TO CHECKOUT</button>
+        </div>
+    </aside>
+
+    <!-- Checkout Modal -->
+    <div class="modal-overlay" id="checkoutModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeModal">&times;</button>
+            <h3>Complete Your Order</h3>
+            <form id="checkoutForm">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" required placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" required placeholder="john@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Shipping Address</label>
+                    <textarea required rows="3" placeholder="123 Main Street, City, Country"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Payment Method</label>
+                    <select required>
+                        <option value="cod">Cash on Delivery (COD)</option>
+                        <option value="card">Credit / Debit Card</option>
+                    </select>
+                </div>
+                <button type="submit" class="submit-order-btn">PLACE ORDER NOW</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-col">
+                <span class="brand-text">buy2bm</span>
+                <p>Your ultimate destination for high-speed charging, premium sound equipment, and mobile power solutions.</p>
+            </div>
+            <div class="footer-col">
+                <h4>USEFUL LINKS</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Warranty & Returns</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>GET IN TOUCH</h4>
+                <p><strong>Support:</strong> info@buy2bm.com</p>
+                <p><strong>Hotline:</strong> +1 (800) 555-2892</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 buy2bm Store. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
