@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buy2BM | Premier Tech & Electronics Store</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- Google Fonts (Inter) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            roninRed: '#E31E24',
+            roninDark: '#121212',
+            roninGray: '#F5F5F7',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Ronin.pk Style Animations & Hover Effects */
+    .product-card {
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.15);
+    }
+    .img-hover-swap .primary-img {
+      transition: opacity 0.4s ease, transform 0.5s ease;
+    }
+    .img-hover-swap .secondary-img {
+      transition: opacity 0.4s ease, transform 0.5s ease;
+      opacity: 0;
+    }
+    .product-card:hover .primary-img {
+      opacity: 0;
+      transform: scale(1.06);
+    }
+    .product-card:hover .secondary-img {
+      opacity: 1;
+      transform: scale(1.06);
+    }
+    .quick-add-btn {
+      transform: translateY(100%);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .product-card:hover .quick-add-btn {
+      transform: translateY(0);
+    }
+    .category-circle {
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+    .category-circle:hover {
+      transform: scale(1.08);
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased">
+
+  <!-- 1. Top Announcement Bar -->
+  <div class="bg-black text-white text-xs font-medium py-2 px-4 text-center tracking-wide">
+    🚀 FREE SHIPPING NATIONWIDE ON ORDERS ABOVE RS. 3,000 | 100% ORIGINAL GUARANTEED
+  </div>
+
+  <!-- 2. Header & Navigation Bar -->
+  <header class="sticky top-0 z-40 bg-white border-b border-gray-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20 gap-4">
+        
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-2 text-2xl font-extrabold tracking-tight text-gray-900">
+          <span class="bg-roninRed text-white px-2.5 py-1 rounded-md">Buy2</span><span class="text-roninRed">BM</span>
+        </a>
+
+        <!-- Search Bar -->
+        <div class="hidden md:flex flex-1 max-w-lg mx-8 relative">
+          <input type="text" id="searchInput" onkeyup="filterProducts()" placeholder="Search Earbuds, Smartwatches, Power Banks..." class="w-full bg-gray-100 border border-transparent rounded-full py-2.5 pl-5 pr-12 text-sm focus:bg-white focus:border-roninRed focus:outline-none transition-all" />
+          <button class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-roninRed p-1">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+
+        <!-- Action Icons -->
+        <div class="flex items-center gap-5">
+          <!-- Add Product Button (Modal Trigger) -->
+          <button onclick="openAddProductModal()" class="flex items-center gap-2 bg-roninRed hover:bg-red-700 text-white font-medium text-xs sm:text-sm px-3.5 py-2 rounded-full transition-all shadow-sm">
+            <i class="fa-solid fa-plus text-xs"></i>
+            <span>Add Product</span>
+          </button>
+
+          <!-- Cart Drawer Trigger -->
+          <button onclick="toggleCartDrawer()" class="relative p-2 text-gray-700 hover:text-roninRed transition-colors">
+            <i class="fa-solid fa-bag-shopping text-xl"></i>
+            <span id="cartCountBadge" class="absolute -top-1 -right-1 bg-roninRed text-white text-[10px] font-bold h-5 w-5 rounded-full flex items-center justify-center">0</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 3. Hero Carousel Banner (Auto-slider) -->
+  <section class="relative bg-gray-900 overflow-hidden">
+    <div id="carouselTrack" class="flex transition-transform duration-700 ease-in-out">
+      <!-- Slide 1 -->
+      <div class="min-w-full relative h-[280px] sm:h-[420px] md:h-[500px]">
+        <img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=1600&q=80" class="w-full h-full object-cover opacity-60" alt="Earbuds Banner" />
+        <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent flex items-center">
+          <div class="max-w-7xl mx-auto px-6 sm:px-12 w-full text-white">
+            <span class="inline-block bg-roninRed text-white text-xs uppercase tracking-widest font-bold px-3 py-1 rounded-full mb-3">New Launch</span>
+            <h1 class="text-3xl sm:text-5xl font-extrabold mb-3 leading-tight">Next-Gen Wireless<br/>TWS Earbuds</h1>
+            <p class="text-gray-300 text-sm sm:text-base mb-6 max-w-md">Immersive spatial audio with up to 40 hours of playtime and ANC feature.</p>
+            <a href="#catalog" class="inline-block bg-white text-black hover:bg-roninRed hover:text-white font-bold text-xs sm:text-sm uppercase tracking-wider px-6 py-3 rounded-md transition-all">Shop Collection</a>
+          </div>
+        </div>
+      </div>
+      <!-- Slide 2 -->
+      <div class="min-w-full relative h-[280px] sm:h-[420px] md:h-[500px]">
+        <img src="https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=1600&q=80" class="w-full h-full object-cover opacity-60" alt="Smartwatch Banner" />
+        <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent flex items-center">
+          <div class="max-w-7xl mx-auto px-6 sm:px-12 w-full text-white">
+            <span class="inline-block bg-roninRed text-white text-xs uppercase tracking-widest font-bold px-3 py-1 rounded-full mb-3">Best Seller</span>
+            <h1 class="text-3xl sm:text-5xl font-extrabold mb-3 leading-tight">Smart Fitness<br/>Smartwatches</h1>
+            <p class="text-gray-300 text-sm sm:text-base mb-6 max-w-md">HD AMOLED Display with Bluetooth calling and 100+ workout modes.</p>
+            <a href="#catalog" class="inline-block bg-white text-black hover:bg-roninRed hover:text-white font-bold text-xs sm:text-sm uppercase tracking-wider px-6 py-3 rounded-md transition-all">Explore Smartwatches</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Carousel Controls -->
+    <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/80 hover:text-black text-white p-3 rounded-full backdrop-blur-md transition-all">
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
+    <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/80 hover:text-black text-white p-3 rounded-full backdrop-blur-md transition-all">
+      <i class="fa-solid fa-chevron-right"></i>
+    </button>
+  </section>
+
+  <!-- 4. Circular Category Navigation (Ronin Style) -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <h2 class="text-center text-xl sm:text-2xl font-bold uppercase tracking-wide mb-8">Shop By Category</h2>
+    <div class="flex items-center justify-start md:justify-center gap-6 overflow-x-auto no-scrollbar pb-4">
+      
+      <div onclick="filterByCategory('All')" class="flex flex-col items-center gap-2 cursor-pointer group min-w-[90px]">
+        <div class="category-circle w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white border-2 border-gray-200 group-hover:border-roninRed shadow-sm flex items-center justify-center p-3">
+          <i class="fa-solid fa-border-all text-2xl text-gray-700 group-hover:text-roninRed"></i>
+        </div>
+        <span class="text-xs font-semibold text-gray-700 group-hover:text-roninRed">All Products</span>
+      </div>
+
+      <div onclick="filterByCategory('Earbuds')" class="flex flex-col items-center gap-2 cursor-pointer group min-w-[90px]">
+        <div class="category-circle w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white border-2 border-gray-200 group-hover:border-roninRed shadow-sm flex items-center justify-center p-3">
+          <i class="fa-solid fa-headphones text-2xl text-gray-700 group-hover:text-roninRed"></i>
+        </div>
+        <span class="text-xs font-semibold text-gray-700 group-hover:text-roninRed">Earbuds</span>
+      </div>
+
+      <div onclick="filterByCategory('Smartwatches')" class="flex flex-col items-center gap-2 cursor-pointer group min-w-[90px]">
+        <div class="category-circle w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white border-2 border-gray-200 group-hover:border-roninRed shadow-sm flex items-center justify-center p-3">
+          <i class="fa-solid fa-clock text-2xl text-gray-700 group-hover:text-roninRed"></i>
+        </div>
+        <span class="text-xs font-semibold text-gray-700 group-hover:text-roninRed">Smartwatches</span>
+      </div>
+
+      <div onclick="filterByCategory('Power Banks')" class="flex flex-col items-center gap-2 cursor-pointer group min-w-[90px]">
+        <div class="category-circle w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white border-2 border-gray-200 group-hover:border-roninRed shadow-sm flex items-center justify-center p-3">
+          <i class="fa-solid fa-battery-full text-2xl text-gray-700 group-hover:text-roninRed"></i>
+        </div>
+        <span class="text-xs font-semibold text-gray-700 group-hover:text-roninRed">Power Banks</span>
+      </div>
+
+      <div onclick="filterByCategory('Chargers')" class="flex flex-col items-center gap-2 cursor-pointer group min-w-[90px]">
+        <div class="category-circle w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white border-2 border-gray-200 group-hover:border-roninRed shadow-sm flex items-center justify-center p-3">
+          <i class="fa-solid fa-bolt text-2xl text-gray-700 group-hover:text-roninRed"></i>
+        </div>
+        <span class="text-xs font-semibold text-gray-700 group-hover:text-roninRed">Chargers</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 5. Product Catalog Section -->
+  <section id="catalog" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 border-t border-gray-200">
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
+      <div>
+        <h2 class="text-2xl font-extrabold text-gray-900 uppercase tracking-wide">Featured Catalog</h2>
+        <p class="text-xs text-gray-500 mt-1">Explore top electronic accessories at unbeatable prices.</p>
+      </div>
+
+      <!-- Price Sorter -->
+      <div class="flex items-center gap-2">
+        <label for="sortSelect" class="text-xs font-semibold text-gray-600">Sort By:</label>
+        <select id="sortSelect" onchange="sortProducts()" class="bg-white border border-gray-300 text-xs rounded-md py-1.5 px-3 focus:outline-none focus:border-roninRed">
+          <option value="featured">Featured</option>
+          <option value="lowToHigh">Price: Low to High</option>
+          <option value="highToLow">Price: High to Low</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Product Grid -->
+    <div id="productGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+      <!-- Dynamic Products Rendered Here -->
+    </div>
+  </section>
+
+  <!-- 6. Cart Drawer (Slide Over Panel) -->
+  <div id="cartDrawer" class="fixed inset-0 z-50 overflow-hidden hidden" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+    <div onclick="toggleCartDrawer()" class="fixed inset-0 bg-black/60 transition-opacity"></div>
+    <div class="fixed inset-y-0 right-0 pl-10 max-w-full flex">
+      <div class="w-screen max-w-md bg-white shadow-2xl flex flex-col">
+        <!-- Drawer Header -->
+        <div class="p-5 border-b border-gray-200 flex items-center justify-between bg-gray-50">
+          <h2 class="text-base font-bold text-gray-900 flex items-center gap-2">
+            <i class="fa-solid fa-bag-shopping text-roninRed"></i> Your Cart
+          </h2>
+          <button onclick="toggleCartDrawer()" class="text-gray-400 hover:text-gray-600 p-1">
+            <i class="fa-solid fa-xmark text-xl"></i>
+          </button>
+        </div>
+
+        <!-- Drawer Body -->
+        <div id="cartItemsList" class="flex-1 overflow-y-auto p-5 space-y-4">
+          <!-- Cart items dynamically added -->
+        </div>
+
+        <!-- Drawer Footer -->
+        <div class="p-5 border-t border-gray-200 bg-gray-50">
+          <div class="flex justify-between text-base font-bold text-gray-900 mb-4">
+            <span>Subtotal</span>
+            <span id="cartSubtotal">Rs. 0</span>
+          </div>
+          <button onclick="openCheckoutModal()" class="w-full bg-roninRed hover:bg-red-700 text-white font-bold py-3 rounded-md uppercase tracking-wider text-sm transition-colors">
+            Proceed To Checkout
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. Add Product Modal -->
+  <div id="addProductModal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-black/70 flex items-center justify-center p-4">
+    <div class="bg-white rounded-xl shadow-2xl max-w-md w-full p-6 relative">
+      <button onclick="closeAddProductModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+        <i class="fa-solid fa-xmark text-xl"></i>
+      </button>
+
+      <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+        <i class="fa-solid fa-circle-plus text-roninRed"></i> Add New Product (Demo)
+      </h3>
+
+      <form id="addProductForm" onsubmit="handleAddProduct(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-gray-700 mb-1">Product Title</label>
+          <input type="text" id="newTitle" required placeholder="e.g., Ronin R-520 TWS" class="w-full border border-gray-300 rounded-md py-2 px-3 text-xs focus:outline-none focus:border-roninRed" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-gray-700 mb-1">Category</label>
+            <select id="newCategory" class="w-full border border-gray-300 rounded-md py-2 px-3 text-xs focus:outline-none focus:border-roninRed">
+              <option value="Earbuds">Earbuds</option>
+              <option value="Smartwatches">Smartwatches</option>
+              <option value="Power Banks">Power Banks</option>
+              <option value="Chargers">Chargers</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-700 mb-1">Badge Tag</label>
+            <input type="text" id="newBadge" placeholder="e.g., SALE / NEW" class="w-full border border-gray-300 rounded-md py-2 px-3 text-xs focus:outline-none focus:border-roninRed" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-gray-700 mb-1">Price (Rs.)</label>
+            <input type="number" id="newPrice" required placeholder="3500" class="w-full border border-gray-300 rounded-md py-2 px-3 text-xs focus:outline-none focus:border-roninRed" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-700 mb-1">Original Price (Rs.)</label>
+            <input type="number" id="newOriginalPrice" placeholder="4500" class="w-full border border-gray-300 rounded-md py-2 px-3 text-xs focus:outline-none focus:border-roninRed" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-gray-700 mb-1">Primary Image URL</label>
+          <input type="url" id="newImg1" required placeholder="https://images.unsplash.com/..." class="w-full border border-gray-300 rounded-md py-2 px-3 text-xs focus:outline-none focus:border-roninRed" />
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-gray-700 mb-1">Hover Image URL (Optional)</label>
+          <input type="url" id="newImg2" placeholder="https://images.unsplash.com/..." class="w-full border border-gray-300 rounded-md py-2 px-3 text-xs focus:outline-none focus:border-roninRed" />
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-gray-700 mb-1">Specifications</label>
+          <input type="text" id="newSpecs" placeholder="Bluetooth 5.3 • 30 hrs Playtime" class="w-full border border-gray-300 rounded-md py-2 px-3 text-xs focus:outline-none focus:border-roninRed" />
+        </div>
+
+        <button type="submit" class="w-full bg-roninRed hover:bg-red-700 text-white font-bold py-2.5 rounded-md text-xs uppercase tracking-wider transition-colors mt-2">
+          Publish Product
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 8. Checkout Form Modal -->
+  <div id="checkoutModal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-black/70 flex items-center justify-center p-4">
+    <div class="bg-white rounded-xl shadow-2xl max-w-md w-full p-6 relative">
+      <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+        <i class="fa-solid fa-xmark text-xl"></i>
+      </button>
+
+      <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2 border-b pb-3">
+        <i class="fa-solid fa-truck-fast text-roninRed"></i> Cash On Delivery Checkout
+      </h3>
+
+      <form onsubmit="handleOrderSubmit(event)" class="space-y-3">
+        <div>
+          <label class="block text-xs font-semibold text-gray-700 mb-1">Full Name</label>
+          <input type="text" required placeholder="Usman Ghany" class="w-full border border-gray-300 rounded-md py-2 px-3 text-xs focus:outline-none focus:border-roninRed" />
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-gray-700 mb-1">Mobile Number</label>
+          <input type="tel" required placeholder="0300 1234567" class="w-full border border-gray-300 rounded-md py-2 px-3 text-xs focus:outline-none focus:border-roninRed" />
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-gray-700 mb-1">Shipping Address</label>
+          <textarea required rows="2" placeholder="House/Street, City, Province" class="w-full border border-gray-300 rounded-md py-2 px-3 text-xs focus:outline-none focus:border-roninRed"></textarea>
+        </div>
+
+        <div class="bg-gray-50 p-3 rounded-md border text-xs space-y-1">
+          <div class="flex justify-between text-gray-600"><span>Payment Method:</span> <span class="font-bold text-gray-800">Cash On Delivery</span></div>
+          <div class="flex justify-between text-gray-600"><span>Delivery Fee:</span> <span class="font-bold text-green-600">FREE</span></div>
+        </div>
+
+        <button type="submit" class="w-full bg-roninRed hover:bg-red-700 text-white font-bold py-3 rounded-md text-xs uppercase tracking-wider transition-colors mt-2">
+          Confirm Order
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- JavaScript Application State & Logic -->
+  <script>
+    // Initial Catalog Data (Ronin.pk Style Products)
+    let products = [
+      {
+        id: 1,
+        title: "Ronin R-520 Wireless Earbuds",
+        category: "Earbuds",
+        price: 3450,
+        originalPrice: 4200,
+        badge: "SALE",
+        image1: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=600&q=80",
+        image2: "https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?auto=format&fit=crop&w=600&q=80",
+        specs: "BT 5.3 • Quad Mic ENC • 35 hrs Battery"
+      },
+      {
+        id: 2,
+        title: "Ronin R-007 Smartwatch AMOLED",
+        category: "Smartwatches",
+        price: 7800,
+        originalPrice: 9500,
+        badge: "HOT",
+        image1: "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=600&q=80",
+        image2: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80",
+        specs: "1.43\" AMOLED • BT Calling • IP68 Water Resistant"
+      },
+      {
+        id: 3,
+        title: "Ronin R-990 20000mAh Power Bank",
+        category: "Power Banks",
+        price: 5200,
+        originalPrice: 6000,
+        badge: "BEST SELLER",
+        image1: "https://images.unsplash.com/photo-1609592424109-dd9892f1b177?auto=format&fit=crop&w=600&q=80",
+        image2: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=600&q=80",
+        specs: "22.5W Fast Charging • Dual Output • LED Display"
+      },
+      {
+        id: 4,
+        title: "Ronin R-65W GaN Fast Charger",
+        category: "Chargers",
+        price: 2950,
+        originalPrice: 3500,
+        badge: "NEW",
+        image1: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=600&q=80",
+        image2: "https://images.unsplash.com/photo-1609592424109-dd9892f1b177?auto=format&fit=crop&w=600&q=80",
+        specs: "65W Type-C Power Delivery • Compact GaN Tech"
+      }
+    ];
+
+    let cart = [];
+    let activeCategory = 'All';
+
+    // Carousel Slider Logic
+    let currentSlide = 0;
+    const carouselTrack = document.getElementById('carouselTrack');
+    const totalSlides = 2;
+
+    function updateCarousel() {
+      carouselTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      updateCarousel();
+    }
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+      updateCarousel();
+    }
+    setInterval(nextSlide, 5000); // Auto slide every 5s
+
+    // Render Products
+    function renderProducts(itemsToRender = products) {
+      const grid = document.getElementById('productGrid');
+      grid.innerHTML = '';
+
+      if (itemsToRender.length === 0) {
+        grid.innerHTML = `<div class="col-span-full py-12 text-center text-gray-500 text-sm">No products found matching your search.</div>`;
+        return;
+      }
+
+      itemsToRender.forEach(p => {
+        const hasDiscount = p.originalPrice && p.originalPrice > p.price;
+        const discountPercent = hasDiscount ? Math.round(((p.originalPrice - p.price) / p.originalPrice) * 100) : 0;
+
+        grid.innerHTML += `
+          <div class="product-card bg-white rounded-lg border border-gray-200 overflow-hidden flex flex-col justify-between relative group">
+            
+            <!-- Badges -->
+            <div class="absolute top-2.5 left-2.5 z-10 flex flex-col gap-1">
+              ${p.badge ? `<span class="bg-roninRed text-white text-[10px] font-extrabold px-2 py-0.5 rounded uppercase tracking-wider">${p.badge}</span>` : ''}
+              ${hasDiscount ? `<span class="bg-black text-white text-[10px] font-extrabold px-2 py-0.5 rounded uppercase tracking-wider">-${discountPercent}%</span>` : ''}
+            </div>
+
+            <!-- Image Swap Container -->
+            <div class="img-hover-swap relative h-48 sm:h-60 bg-gray-50 overflow-hidden flex items-center justify-center p-4 cursor-pointer">
+              <img src="${p.image1}" alt="${p.title}" class="primary-img absolute inset-0 w-full h-full object-contain p-2" />
+              <img src="${p.image2 || p.image1}" alt="${p.title}" class="secondary-img absolute inset-0 w-full h-full object-contain p-2" />
+              
+              <!-- Hover Slide-up Quick Button -->
+              <button onclick="addToCart(${p.id})" class="quick-add-btn absolute bottom-0 inset-x-0 bg-roninRed text-white text-xs font-bold py-2.5 text-center uppercase tracking-wider hover:bg-red-700 transition-colors">
+                Add To Cart
+              </button>
+            </div>
+
+            <!-- Product Info -->
+            <div class="p-3 sm:p-4 flex-1 flex flex-col justify-between bg-white border-t border-gray-100">
+              <div>
+                <span class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">${p.category}</span>
+                <h3 class="text-xs sm:text-sm font-bold text-gray-800 line-clamp-2 mt-0.5 group-hover:text-roninRed transition-colors">${p.title}</h3>
+                <p class="text-[11px] text-gray-500 mt-1 line-clamp-1">${p.specs}</p>
+              </div>
+
+              <div class="mt-3 flex items-baseline gap-2">
+                <span class="text-sm sm:text-base font-extrabold text-roninRed">Rs. ${p.price.toLocaleString()}</span>
+                ${hasDiscount ? `<span class="text-xs text-gray-400 line-through">Rs. ${p.originalPrice.toLocaleString()}</span>` : ''}
+              </div>
+            </div>
+
+          </div>
+        `;
+      });
+    }
+
+    // Category Filter
+    function filterByCategory(category) {
+      activeCategory = category;
+      filterProducts();
+    }
+
+    // Search and Filtering Combined
+    function filterProducts() {
+      const query = document.getElementById('searchInput').value.toLowerCase();
+      let filtered = products;
+
+      if (activeCategory !== 'All') {
+        filtered = filtered.filter(p => p.category === activeCategory);
+      }
+
+      if (query.trim() !== '') {
+        filtered = filtered.filter(p => 
+          p.title.toLowerCase().includes(query) || 
+          p.category.toLowerCase().includes(query) ||
+          p.specs.toLowerCase().includes(query)
+        );
+      }
+
+      renderProducts(filtered);
+    }
+
+    // Price Sorter
+    function sortProducts() {
+      const mode = document.getElementById('sortSelect').value;
+      let sorted = [...products];
+
+      if (mode === 'lowToHigh') {
+        sorted.sort((a, b) => a.price - b.price);
+      } else if (mode === 'highToLow') {
+        sorted.sort((a, b) => b.price - a.price);
+      }
+
+      renderProducts(sorted);
+    }
+
+    // Cart Management
+    function addToCart(productId) {
+      const item = products.find(p => p.id === productId);
+      const existing = cart.find(c => c.id === productId);
+
+      if (existing) {
+        existing.quantity++;
+      } else {
+        cart.push({ ...item, quantity: 1 });
+      }
+
+      updateCartUI();
+      toggleCartDrawer(true);
+    }
+
+    function updateCartQuantity(productId, delta) {
+      const index = cart.findIndex(c => c.id === productId);
+      if (index !== -1) {
+        cart[index].quantity += delta;
+        if (cart[index].quantity <= 0) {
+          cart.splice(index, 1);
+        }
+      }
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      const list = document.getElementById('cartItemsList');
+      const badge = document.getElementById('cartCountBadge');
+      const subtotalEl = document.getElementById('cartSubtotal');
+
+      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+      const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+      badge.innerText = totalItems;
+      subtotalEl.innerText = `Rs. ${subtotal.toLocaleString()}`;
+
+      if (cart.length === 0) {
+        list.innerHTML = `<p class="text-center text-gray-400 text-xs py-10">Your cart is empty.</p>`;
+        return;
+      }
+
+      list.innerHTML = cart.map(item => `
+        <div class="flex items-center justify-between gap-3 border-b border-gray-100 pb-3">
+          <img src="${item.image1}" class="w-12 h-12 object-contain bg-gray-50 rounded border" alt="" />
+          <div class="flex-1">
+            <h4 class="text-xs font-bold text-gray-800 line-clamp-1">${item.title}</h4>
+            <span class="text-xs text-roninRed font-bold">Rs. ${(item.price * item.quantity).toLocaleString()}</span>
+          </div>
+          <div class="flex items-center border rounded">
+            <button onclick="updateCartQuantity(${item.id}, -1)" class="px-2 py-0.5 text-xs text-gray-600 hover:bg-gray-100">-</button>
+            <span class="px-2 text-xs font-bold">${item.quantity}</span>
+            <button onclick="updateCartQuantity(${item.id}, 1)" class="px-2 py-0.5 text-xs text-gray-600 hover:bg-gray-100">+</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function toggleCartDrawer(forceOpen = false) {
+      const drawer = document.getElementById('cartDrawer');
+      if (forceOpen) {
+        drawer.classList.remove('hidden');
+      } else {
+        drawer.classList.toggle('hidden');
+      }
+    }
+
+    // Modal Triggers
+    function openAddProductModal() {
+      document.getElementById('addProductModal').classList.remove('hidden');
+    }
+    function closeAddProductModal() {
+      document.getElementById('addProductModal').classList.add('hidden');
+    }
+    function openCheckoutModal() {
+      if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+      }
+      toggleCartDrawer(false);
+      document.getElementById('checkoutModal').classList.remove('hidden');
+    }
+    function closeCheckoutModal() {
+      document.getElementById('checkoutModal').classList.add('hidden');
+    }
+
+    // Add Product Form Handler
+    function handleAddProduct(e) {
+      e.preventDefault();
+      const newProduct = {
+        id: Date.now(),
+        title: document.getElementById('newTitle').value,
+        category: document.getElementById('newCategory').value,
+        badge: document.getElementById('newBadge').value,
+        price: parseFloat(document.getElementById('newPrice').value),
+        originalPrice: parseFloat(document.getElementById('newOriginalPrice').value) || null,
+        image1: document.getElementById('newImg1').value,
+        image2: document.getElementById('newImg2').value || document.getElementById('newImg1').value,
+        specs: document.getElementById('newSpecs').value
+      };
+
+      products.unshift(newProduct);
+      renderProducts();
+      closeAddProductModal();
+      document.getElementById('addProductForm').reset();
+      alert("New product published to store catalog!");
+    }
+
+    // Checkout Order Submit Handler
+    function handleOrderSubmit(e) {
+      e.preventDefault();
+      alert("Order placed successfully! Cash on Delivery confirmed.");
+      cart = [];
+      updateCartUI();
+      closeCheckoutModal();
+    }
+
+    // Initial Load
+    renderProducts();
+  </script>
+</body>
+</html>
