@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buy2BM | Official Premium Tech Store</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- Google Fonts (Outfit & Inter) -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            roninRed: '#E31E24',
+            roninDark: '#0D0D0D',
+            roninCardBg: '#F3F4F6',
+          },
+          fontFamily: {
+            sans: ['Outfit', 'Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Ronin Visual Styling, Rounded Borders & Smooth FX */
+    .product-card {
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 40px -15px rgba(0, 0, 0, 0.12);
+    }
+    .img-hover-swap .primary-img {
+      transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .img-hover-swap .secondary-img {
+      transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      opacity: 0;
+    }
+    .product-card:hover .primary-img {
+      opacity: 0;
+      transform: scale(1.08);
+    }
+    .product-card:hover .secondary-img {
+      opacity: 1;
+      transform: scale(1.08);
+    }
+    .quick-add-btn {
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+    .product-card:hover .quick-add-btn {
+      transform: translateY(0);
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-[#F8F9FA] text-gray-900 font-sans antialiased selection:bg-roninRed selection:text-white">
+
+  <!-- 1. Top Announcement Bar -->
+  <div class="bg-black text-white text-[11px] sm:text-xs font-bold py-2.5 px-4 text-center tracking-wide">
+    ⚡ FREE SHIPPING ALL OVER PAKISTAN ON ORDERS ABOVE RS. 3,000 | 7 DAYS CHECKING WARRANTY ⚡
+  </div>
+
+  <!-- 2. Ronin Style Header Menu with Icons -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
+    <!-- Top Utility Bar -->
+    <div class="w-full max-w-[1600px] mx-auto px-4 sm:px-8">
+      <div class="flex items-center justify-between h-20 gap-4">
+        
+        <!-- Brand Logo -->
+        <a href="#" class="flex items-center gap-1.5 text-2xl sm:text-3xl font-black tracking-tight text-gray-900">
+          <span class="bg-roninRed text-white px-3 py-1 rounded-xl shadow-sm">Buy2</span><span class="text-roninRed">BM</span>
+        </a>
+
+        <!-- Search Bar -->
+        <div class="hidden md:flex flex-1 max-w-2xl mx-8 relative">
+          <input type="text" id="searchInput" onkeyup="filterProducts()" placeholder="Search Wireless Earbuds, Smartwatches, Power Banks, Chargers..." class="w-full bg-gray-100 border border-gray-200 rounded-full py-3 pl-6 pr-14 text-xs font-medium focus:bg-white focus:border-roninRed focus:outline-none transition-all shadow-inner" />
+          <button class="absolute right-2 top-1/2 -translate-y-1/2 bg-roninRed hover:bg-black text-white w-9 h-9 rounded-full flex items-center justify-center transition-colors">
+            <i class="fa-solid fa-magnifying-glass text-xs"></i>
+          </button>
+        </div>
+
+        <!-- Right Header Action Icons -->
+        <div class="flex items-center gap-3 sm:gap-5">
+          <button onclick="openAddProductModal()" class="hidden sm:flex items-center gap-2 bg-black hover:bg-roninRed text-white font-bold text-xs px-4 py-2.5 rounded-full transition-all shadow-md">
+            <i class="fa-solid fa-plus-circle text-sm"></i>
+            <span>Add Item</span>
+          </button>
+
+          <a href="#catalog" class="flex flex-col items-center text-gray-700 hover:text-roninRed text-xs font-semibold transition-colors">
+            <i class="fa-regular fa-heart text-xl mb-0.5"></i>
+            <span class="hidden lg:inline text-[10px]">Wishlist</span>
+          </a>
+
+          <button onclick="toggleCartDrawer()" class="relative flex flex-col items-center text-gray-700 hover:text-roninRed text-xs font-semibold transition-colors">
+            <i class="fa-solid fa-bag-shopping text-2xl"></i>
+            <span id="cartCountBadge" class="absolute -top-1 -right-1 bg-roninRed text-white text-[10px] font-black h-5 w-5 rounded-full flex items-center justify-center border-2 border-white">0</span>
+            <span class="hidden lg:inline text-[10px] mt-0.5">Cart</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category Sub-Header Navigation with Icons (Ronin Style Menu) -->
+    <nav class="bg-gray-50 border-t border-gray-100 hidden md:block">
+      <div class="w-full max-w-[1600px] mx-auto px-8">
+        <ul class="flex items-center justify-center gap-8 py-3 text-xs font-bold uppercase tracking-wider text-gray-700">
+          <li>
+            <button onclick="filterByCategory('All')" class="hover:text-roninRed flex items-center gap-2 transition-colors">
+              <i class="fa-solid fa-border-all text-roninRed"></i> All Products
+            </button>
+          </li>
+          <li>
+            <button onclick="filterByCategory('Earbuds')" class="hover:text-roninRed flex items-center gap-2 transition-colors">
+              <i class="fa-solid fa-headphones text-roninRed"></i> Wireless Earbuds
+            </button>
+          </li>
+          <li>
+            <button onclick="filterByCategory('Smartwatches')" class="hover:text-roninRed flex items-center gap-2 transition-colors">
+              <i class="fa-solid fa-stopwatch text-roninRed"></i> Smartwatches
+            </button>
+          </li>
+          <li>
+            <button onclick="filterByCategory('Power Banks')" class="hover:text-roninRed flex items-center gap-2 transition-colors">
+              <i class="fa-solid fa-battery-charging text-roninRed"></i> Power Banks
+            </button>
+          </li>
+          <li>
+            <button onclick="filterByCategory('Chargers')" class="hover:text-roninRed flex items-center gap-2 transition-colors">
+              <i class="fa-solid fa-bolt text-roninRed"></i> Fast Chargers
+            </button>
+          </li>
+          <li>
+            <button onclick="filterByCategory('Speakers')" class="hover:text-roninRed flex items-center gap-2 transition-colors">
+              <i class="fa-solid fa-volume-high text-roninRed"></i> Speakers
+            </button>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- 3. Full-Width Hero Slider with Rounded Banner Corners -->
+  <section class="w-full max-w-[1600px] mx-auto px-4 sm:px-8 py-6">
+    <div class="relative bg-black rounded-3xl overflow-hidden shadow-2xl">
+      <div id="carouselTrack" class="flex transition-transform duration-700 ease-in-out">
+        <!-- Slide 1 -->
+        <div class="min-w-full relative h-[420px] sm:h-[550px] lg:h-[620px]">
+          <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1800&q=85" class="w-full h-full object-cover opacity-60 rounded-3xl" alt="Headphones" />
+          <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent flex items-center">
+            <div class="max-w-3xl px-8 sm:px-16 text-white">
+              <span class="inline-block bg-roninRed text-white text-xs uppercase font-black tracking-widest px-3.5 py-1.5 rounded-lg mb-4">Flagship Sound</span>
+              <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black mb-4 leading-tight">PURE AUDIO<br/><span class="text-roninRed">PERFECTION</span></h1>
+              <p class="text-gray-300 text-xs sm:text-base mb-8 max-w-lg leading-relaxed">Active Noise Cancellation (ANC), studio grade acoustics & up to 60H playback time.</p>
+              <a href="#new-arrivals" class="inline-block bg-roninRed text-white hover:bg-white hover:text-black font-extrabold text-xs sm:text-sm uppercase tracking-wider px-8 py-4 rounded-xl transition-all shadow-xl hover:scale-105">Shop Collection</a>
+            </div>
+          </div>
+        </div>
+        <!-- Slide 2 -->
+        <div class="min-w-full relative h-[420px] sm:h-[550px] lg:h-[620px]">
+          <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1800&q=85" class="w-full h-full object-cover opacity-60 rounded-3xl" alt="Smartwatches" />
+          <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent flex items-center">
+            <div class="max-w-3xl px-8 sm:px-16 text-white">
+              <span class="inline-block bg-roninRed text-white text-xs uppercase font-black tracking-widest px-3.5 py-1.5 rounded-lg mb-4">Wearable Innovation</span>
+              <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black mb-4 leading-tight">AMOLED ULTRA<br/><span class="text-roninRed">SMARTWATCHES</span></h1>
+              <p class="text-gray-300 text-xs sm:text-base mb-8 max-w-lg leading-relaxed">HD AMOLED Display, BT Calling, Health Tracking & Rugged Metallic Casing.</p>
+              <a href="#best-sellers" class="inline-block bg-roninRed text-white hover:bg-white hover:text-black font-extrabold text-xs sm:text-sm uppercase tracking-wider px-8 py-4 rounded-xl transition-all shadow-xl hover:scale-105">Explore Watches</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button onclick="prevSlide()" class="absolute left-6 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-roninRed text-white p-4 rounded-full backdrop-blur-md transition-all">
+        <i class="fa-solid fa-chevron-left text-base"></i>
+      </button>
+      <button onclick="nextSlide()" class="absolute right-6 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-roninRed text-white p-4 rounded-full backdrop-blur-md transition-all">
+        <i class="fa-solid fa-chevron-right text-base"></i>
+      </button>
+    </div>
+  </section>
+
+  <!-- 4. Circular Category Navigation (Ronin Style) -->
+  <section class="w-full max-w-[1600px] mx-auto px-4 sm:px-8 py-10">
+    <h2 class="text-center text-xl sm:text-2xl font-black uppercase tracking-wider mb-8 text-gray-900">Explore Top Categories</h2>
+    <div class="flex items-center justify-start md:justify-center gap-6 sm:gap-10 overflow-x-auto no-scrollbar pb-4">
+      
+      <div onclick="filterByCategory('All')" class="flex flex-col items-center gap-3 cursor-pointer group min-w-[100px]">
+        <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-white border-2 border-gray-200 group-hover:border-roninRed flex items-center justify-center transition-all group-hover:scale-105 shadow-sm group-hover:shadow-md">
+          <i class="fa-solid fa-border-all text-3xl text-gray-700 group-hover:text-roninRed"></i>
+        </div>
+        <span class="text-xs font-bold text-gray-800 group-hover:text-roninRed">All</span>
+      </div>
+
+      <div onclick="filterByCategory('Earbuds')" class="flex flex-col items-center gap-3 cursor-pointer group min-w-[100px]">
+        <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-white border-2 border-gray-200 group-hover:border-roninRed flex items-center justify-center transition-all group-hover:scale-105 shadow-sm group-hover:shadow-md">
+          <i class="fa-solid fa-headphones text-3xl text-gray-700 group-hover:text-roninRed"></i>
+        </div>
+        <span class="text-xs font-bold text-gray-800 group-hover:text-roninRed">Earbuds</span>
+      </div>
+
+      <div onclick="filterByCategory('Smartwatches')" class="flex flex-col items-center gap-3 cursor-pointer group min-w-[100px]">
+        <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-white border-2 border-gray-200 group-hover:border-roninRed flex items-center justify-center transition-all group-hover:scale-105 shadow-sm group-hover:shadow-md">
+          <i class="fa-solid fa-clock text-3xl text-gray-700 group-hover:text-roninRed"></i>
+        </div>
+        <span class="text-xs font-bold text-gray-800 group-hover:text-roninRed">Smartwatches</span>
+      </div>
+
+      <div onclick="filterByCategory('Power Banks')" class="flex flex-col items-center gap-3 cursor-pointer group min-w-[100px]">
+        <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-white border-2 border-gray-200 group-hover:border-roninRed flex items-center justify-center transition-all group-hover:scale-105 shadow-sm group-hover:shadow-md">
+          <i class="fa-solid fa-battery-full text-3xl text-gray-700 group-hover:text-roninRed"></i>
+        </div>
+        <span class="text-xs font-bold text-gray-800 group-hover:text-roninRed">Power Banks</span>
+      </div>
+
+      <div onclick="filterByCategory('Chargers')" class="flex flex-col items-center gap-3 cursor-pointer group min-w-[100px]">
+        <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-white border-2 border-gray-200 group-hover:border-roninRed flex items-center justify-center transition-all group-hover:scale-105 shadow-sm group-hover:shadow-md">
+          <i class="fa-solid fa-bolt text-3xl text-gray-700 group-hover:text-roninRed"></i>
+        </div>
+        <span class="text-xs font-bold text-gray-800 group-hover:text-roninRed">Chargers</span>
+      </div>
+
+      <div onclick="filterByCategory('Speakers')" class="flex flex-col items-center gap-3 cursor-pointer group min-w-[100px]">
+        <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-white border-2 border-gray-200 group-hover:border-roninRed flex items-center justify-center transition-all group-hover:scale-105 shadow-sm group-hover:shadow-md">
+          <i class="fa-solid fa-volume-high text-3xl text-gray-700 group-hover:text-roninRed"></i>
+        </div>
+        <span class="text-xs font-bold text-gray-800 group-hover:text-roninRed">Speakers</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 5. NEW ARRIVALS SECTION (Large Cards & Rounded Corners) -->
+  <section id="new-arrivals" class="w-full max-w-[1600px] mx-auto px-4 sm:px-8 py-10">
+    <div class="flex items-center justify-between mb-8 border-b border-gray-200 pb-4">
+      <div>
+        <span class="text-roninRed text-xs font-black uppercase tracking-widest">Fresh Collection</span>
+        <h2 class="text-2xl sm:text-3xl font-black text-gray-900">NEW ARRIVALS</h2>
+      </div>
+      <a href="#catalog" class="text-xs font-bold text-roninRed hover:underline flex items-center gap-1.5">View All <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    <div id="newArrivalsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
+  </section>
+
+  <!-- 6. TOP TRENDING SECTION -->
+  <section class="w-full max-w-[1600px] mx-auto px-4 sm:px-8 py-10">
+    <div class="flex items-center justify-between mb-8 border-b border-gray-200 pb-4">
+      <div>
+        <span class="text-roninRed text-xs font-black uppercase tracking-widest">Most Popular</span>
+        <h2 class="text-2xl sm:text-3xl font-black text-gray-900">TOP TRENDING</h2>
+      </div>
+    </div>
+    <div id="topTrendingGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
+  </section>
+
+  <!-- 7. EXCEPTIONAL QUALITY DELIVERED (Rounded Banner Section) -->
+  <section class="w-full max-w-[1600px] mx-auto px-4 sm:px-8 my-12">
+    <div class="bg-black text-white py-16 px-6 sm:px-12 rounded-3xl relative overflow-hidden shadow-2xl">
+      <div class="absolute inset-0 opacity-25">
+        <img src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=1800&q=85" class="w-full h-full object-cover rounded-3xl" alt="Banner" />
+      </div>
+      <div class="relative z-10 text-center max-w-4xl mx-auto">
+        <span class="bg-roninRed text-white text-xs uppercase font-black tracking-widest px-3.5 py-1.5 rounded-lg">The Ronin Standard</span>
+        <h2 class="text-3xl sm:text-5xl font-black my-5 tracking-tight leading-tight">EXCEPTIONAL QUALITY DELIVERED</h2>
+        <p class="text-gray-300 text-xs sm:text-base leading-relaxed mb-10 max-w-2xl mx-auto">
+          We engineer every gadget with precision. Enjoy crystal-clear sound, long-lasting battery life, and high-performance durability crafted specifically for everyday use.
+        </p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-gray-800 pt-8">
+          <div>
+            <h3 class="text-3xl font-black text-roninRed">100%</h3>
+            <p class="text-xs text-gray-400 uppercase font-bold mt-1">Original Products</p>
+          </div>
+          <div>
+            <h3 class="text-3xl font-black text-roninRed">7 Days</h3>
+            <p class="text-xs text-gray-400 uppercase font-bold mt-1">Checking Warranty</p>
+          </div>
+          <div>
+            <h3 class="text-3xl font-black text-roninRed">Fast COD</h3>
+            <p class="text-xs text-gray-400 uppercase font-bold mt-1">All Over Pakistan</p>
+          </div>
+          <div>
+            <h3 class="text-3xl font-black text-roninRed">24/7</h3>
+            <p class="text-xs text-gray-400 uppercase font-bold mt-1">Dedicated Support</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. BEST SELLERS SECTION -->
+  <section id="best-sellers" class="w-full max-w-[1600px] mx-auto px-4 sm:px-8 py-10">
+    <div class="flex items-center justify-between mb-8 border-b border-gray-200 pb-4">
+      <div>
+        <span class="text-roninRed text-xs font-black uppercase tracking-widest">Customer Choice</span>
+        <h2 class="text-2xl sm:text-3xl font-black text-gray-900">BEST SELLERS</h2>
+      </div>
+    </div>
+    <div id="bestSellersGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
+  </section>
+
+  <!-- 9. RECOMMENDED / PERSONALISED SECTION -->
+  <section class="w-full max-w-[1600px] mx-auto px-4 sm:px-8 py-10">
+    <div class="flex items-center justify-between mb-8 border-b border-gray-200 pb-4">
+      <div>
+        <span class="text-roninRed text-xs font-black uppercase tracking-widest">Handpicked For You</span>
+        <h2 class="text-2xl sm:text-3xl font-black text-gray-900">RECOMMENDED FOR YOU</h2>
+      </div>
+    </div>
+    <div id="personalizedGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
+  </section>
+
+  <!-- 10. MAIN CATALOG SECTION -->
+  <section id="catalog" class="w-full max-w-[1600px] mx-auto px-4 sm:px-8 py-12 border-t border-gray-200 mt-10">
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-10 gap-4">
+      <div>
+        <h2 class="text-2xl sm:text-3xl font-black text-gray-900 uppercase">ALL PRODUCTS CATALOG</h2>
+        <p class="text-xs text-gray-500 mt-1">Browse through our complete high-performance lineup.</p>
+      </div>
+
+      <!-- Sorter -->
+      <div class="flex items-center gap-3">
+        <label for="sortSelect" class="text-xs font-bold text-gray-700">Sort By:</label>
+        <select id="sortSelect" onchange="sortProducts()" class="bg-white border border-gray-300 text-xs font-semibold rounded-xl py-2.5 px-4 focus:outline-none focus:border-roninRed shadow-sm">
+          <option value="featured">Featured First</option>
+          <option value="lowToHigh">Price: Low to High</option>
+          <option value="highToLow">Price: High to Low</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
+  </section>
+
+  <!-- 11. Multi-Column Footer with Rounded Top Corners -->
+  <footer class="bg-roninDark text-gray-400 text-xs pt-16 pb-10 mt-20 rounded-t-[2.5rem] shadow-2xl">
+    <div class="w-full max-w-[1600px] mx-auto px-6 sm:px-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-gray-800">
+      
+      <div>
+        <a href="#" class="inline-block text-3xl font-black text-white mb-5">
+          <span class="bg-roninRed px-3 py-1 rounded-xl">Buy2</span><span class="text-roninRed">BM</span>
+        </a>
+        <p class="leading-relaxed text-gray-400 mb-6 text-xs sm:text-sm">Buy2BM is Pakistan's premier destination for original TWS earbuds, smartwatches, power banks, and heavy-duty chargers.</p>
+        <div class="flex gap-3 text-base">
+          <a href="#" class="w-9 h-9 rounded-full bg-gray-800 hover:bg-roninRed text-white flex items-center justify-center transition-colors"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="w-9 h-9 rounded-full bg-gray-800 hover:bg-roninRed text-white flex items-center justify-center transition-colors"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="w-9 h-9 rounded-full bg-gray-800 hover:bg-roninRed text-white flex items-center justify-center transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="text-white font-bold uppercase tracking-wider text-xs mb-5 border-l-4 border-roninRed pl-3">Customer Care</h4>
+        <ul class="space-y-3 font-medium">
+          <li><a href="#" class="hover:text-white transition-colors">Track Your Order</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Shipping & Delivery Info</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">7 Days Replacement Guarantee</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Warranty Claim Center</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-white font-bold uppercase tracking-wider text-xs mb-5 border-l-4 border-roninRed pl-3">Top Categories</h4>
+        <ul class="space-y-3 font-medium">
+          <li><a href="#catalog" onclick="filterByCategory('Earbuds')" class="hover:text-white transition-colors">Wireless TWS Earbuds</a></li>
+          <li><a href="#catalog" onclick="filterByCategory('Smartwatches')" class="hover:text-white transition-colors">AMOLED Smartwatches</a></li>
+          <li><a href="#catalog" onclick="filterByCategory('Power Banks')" class="hover:text-white transition-colors">Fast Power Banks</a></li>
+          <li><a href="#catalog" onclick="filterByCategory('Chargers')" class="hover:text-white transition-colors">GaN Fast Chargers</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-white font-bold uppercase tracking-wider text-xs mb-5 border-l-4 border-roninRed pl-3">Contact Support</h4>
+        <ul class="space-y-3 font-medium mb-5">
+          <li class="flex items-center gap-3"><i class="fa-solid fa-envelope text-roninRed"></i> support@buy2bm.com</li>
+          <li class="flex items-center gap-3"><i class="fa-solid fa-phone text-roninRed"></i> +92 300 1234567</li>
+          <li class="flex items-center gap-3"><i class="fa-solid fa-location-dot text-roninRed"></i> Lahore, Pakistan</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="w-full max-w-[1600px] mx-auto px-6 sm:px-12 pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-4">
+      <p>&copy; 2026 Buy2BM Store. All Rights Reserved.</p>
+      <div class="flex gap-6">
+        <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+        <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 12. Cart Drawer -->
+  <div id="cartDrawer" class="fixed inset-0 z-50 overflow-hidden hidden">
+    <div onclick="toggleCartDrawer()" class="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity"></div>
+    <div class="fixed inset-y-0 right-0 pl-10 max-w-full flex">
+      <div class="w-screen max-w-md bg-white shadow-2xl flex flex-col">
+        <div class="p-6 border-b border-gray-200 flex items-center justify-between bg-gray-50">
+          <h2 class="text-base font-extrabold text-gray-900 flex items-center gap-2">
+            <i class="fa-solid fa-bag-shopping text-roninRed"></i> Your Shopping Bag
+          </h2>
+          <button onclick="toggleCartDrawer()" class="text-gray-400 hover:text-gray-600 p-1">
+            <i class="fa-solid fa-xmark text-2xl"></i>
+          </button>
+        </div>
+
+        <div id="cartItemsList" class="flex-1 overflow-y-auto p-6 space-y-4"></div>
+
+        <div class="p-6 border-t border-gray-200 bg-gray-50">
+          <div class="flex justify-between text-lg font-black text-gray-900 mb-5">
+            <span>Total Amount</span>
+            <span id="cartSubtotal" class="text-roninRed">Rs. 0</span>
+          </div>
+          <button onclick="openCheckoutModal()" class="w-full bg-roninRed hover:bg-black text-white font-black py-4 rounded-2xl uppercase tracking-wider text-xs transition-colors shadow-lg">
+            Proceed To Checkout (COD)
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 13. Add Product Modal -->
+  <div id="addProductModal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl shadow-2xl max-w-lg w-full p-8 relative">
+      <button onclick="closeAddProductModal()" class="absolute top-6 right-6 text-gray-400 hover:text-gray-600">
+        <i class="fa-solid fa-xmark text-2xl"></i>
+      </button>
+
+      <h3 class="text-lg font-black text-gray-900 mb-6 flex items-center gap-2">
+        <i class="fa-solid fa-circle-plus text-roninRed"></i> Add New Product Item
+      </h3>
+
+      <form id="addProductForm" onsubmit="handleAddProduct(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-gray-700 mb-1">Product Title</label>
+          <input type="text" id="newTitle" required placeholder="Ronin R-520 ANC Earbuds" class="w-full border border-gray-300 rounded-xl py-3 px-4 text-xs font-semibold focus:outline-none focus:border-roninRed" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-gray-700 mb-1">Category</label>
+            <select id="newCategory" class="w-full border border-gray-300 rounded-xl py-3 px-4 text-xs font-semibold focus:outline-none focus:border-roninRed">
+              <option value="Earbuds">Earbuds</option>
+              <option value="Smartwatches">Smartwatches</option>
+              <option value="Power Banks">Power Banks</option>
+              <option value="Chargers">Chargers</option>
+              <option value="Speakers">Speakers</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-gray-700 mb-1">Badge Tag</label>
+            <input type="text" id="newBadge" placeholder="NEW / HOT / SALE" class="w-full border border-gray-300 rounded-xl py-3 px-4 text-xs font-semibold focus:outline-none focus:border-roninRed" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-gray-700 mb-1">Price (Rs.)</label>
+            <input type="number" id="newPrice" required placeholder="4500" class="w-full border border-gray-300 rounded-xl py-3 px-4 text-xs font-semibold focus:outline-none focus:border-roninRed" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-gray-700 mb-1">Original Price (Rs.)</label>
+            <input type="number" id="newOriginalPrice" placeholder="5800" class="w-full border border-gray-300 rounded-xl py-3 px-4 text-xs font-semibold focus:outline-none focus:border-roninRed" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-gray-700 mb-1">Primary Image URL</label>
+          <input type="url" id="newImg1" required placeholder="https://images.unsplash.com/..." class="w-full border border-gray-300 rounded-xl py-3 px-4 text-xs font-semibold focus:outline-none focus:border-roninRed" />
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-gray-700 mb-1">Hover Secondary Image URL</label>
+          <input type="url" id="newImg2" placeholder="https://images.unsplash.com/..." class="w-full border border-gray-300 rounded-xl py-3 px-4 text-xs font-semibold focus:outline-none focus:border-roninRed" />
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-gray-700 mb-1">Specifications</label>
+          <input type="text" id="newSpecs" placeholder="ANC Quad Mic • 50H Playback" class="w-full border border-gray-300 rounded-xl py-3 px-4 text-xs font-semibold focus:outline-none focus:border-roninRed" />
+        </div>
+
+        <button type="submit" class="w-full bg-roninRed hover:bg-black text-white font-black py-3.5 rounded-2xl text-xs uppercase tracking-wider transition-colors mt-2 shadow-md">
+          Publish Product
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 14. Checkout Modal -->
+  <div id="checkoutModal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full p-8 relative">
+      <button onclick="closeCheckoutModal()" class="absolute top-6 right-6 text-gray-400 hover:text-gray-600">
+        <i class="fa-solid fa-xmark text-2xl"></i>
+      </button>
+
+      <h3 class="text-base font-black text-gray-900 mb-6 flex items-center gap-2 border-b pb-4">
+        <i class="fa-solid fa-truck-fast text-roninRed"></i> Cash On Delivery Checkout
+      </h3>
+
+      <form onsubmit="handleOrderSubmit(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-gray-700 mb-1">Full Name</label>
+          <input type="text" required placeholder="Usman Ghany" class="w-full border border-gray-300 rounded-xl py-3 px-4 text-xs font-semibold focus:outline-none focus:border-roninRed" />
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-gray-700 mb-1">Phone Number</label>
+          <input type="tel" required placeholder="0300 1234567" class="w-full border border-gray-300 rounded-xl py-3 px-4 text-xs font-semibold focus:outline-none focus:border-roninRed" />
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-gray-700 mb-1">Shipping Address</label>
+          <textarea required rows="2" placeholder="House/Street, City, Province" class="w-full border border-gray-300 rounded-xl py-3 px-4 text-xs font-semibold focus:outline-none focus:border-roninRed"></textarea>
+        </div>
+
+        <div class="bg-gray-50 p-4 rounded-2xl border text-xs space-y-2 font-semibold">
+          <div class="flex justify-between text-gray-600"><span>Payment Method:</span> <span class="font-bold text-gray-900">Cash On Delivery</span></div>
+          <div class="flex justify-between text-gray-600"><span>Delivery Charges:</span> <span class="font-bold text-green-600">FREE</span></div>
+        </div>
+
+        <button type="submit" class="w-full bg-roninRed hover:bg-black text-white font-black py-4 rounded-2xl text-xs uppercase tracking-wider transition-colors mt-2 shadow-lg">
+          Confirm Order
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- JavaScript Engine -->
+  <script>
+    // Expanded High Quality Product Database
+    let products = [
+      {
+        id: 1,
+        title: "Ronin R-520 ANC TWS Wireless Earbuds",
+        category: "Earbuds",
+        price: 4250,
+        originalPrice: 5500,
+        badge: "NEW ARRIVAL",
+        tag: "new",
+        image1: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=1000&q=85",
+        image2: "https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?auto=format&fit=crop&w=1000&q=85",
+        specs: "Active Noise Cancellation • Quad Mic ENC • 45H Playback"
+      },
+      {
+        id: 2,
+        title: "Ronin R-007 Ultra Smartwatch AMOLED",
+        category: "Smartwatches",
+        price: 8900,
+        originalPrice: 11500,
+        badge: "BEST SELLER",
+        tag: "bestseller",
+        image1: "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=1000&q=85",
+        image2: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1000&q=85",
+        specs: "1.43\" HD AMOLED • Bluetooth Calling • Zinc Body"
+      },
+      {
+        id: 3,
+        title: "Ronin R-990 20000mAh 22.5W Power Bank",
+        category: "Power Banks",
+        price: 5800,
+        originalPrice: 7200,
+        badge: "TOP TRENDING",
+        tag: "trending",
+        image1: "https://images.unsplash.com/photo-1609592424109-dd9892f1b177?auto=format&fit=crop&w=1000&q=85",
+        image2: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=1000&q=85",
+        specs: "22.5W Fast Charging • LED Power Display • Dual Outputs"
+      },
+      {
+        id: 4,
+        title: "Ronin R-65W GaN Dual Port Fast Charger",
+        category: "Chargers",
+        price: 3450,
+        originalPrice: 4200,
+        badge: "NEW ARRIVAL",
+        tag: "new",
+        image1: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=1000&q=85",
+        image2: "https://images.unsplash.com/photo-1609592424109-dd9892f1b177?auto=format&fit=crop&w=1000&q=85",
+        specs: "65W PD Fast Charge • GaN Semiconductor Tech"
+      },
+      {
+        id: 5,
+        title: "Ronin R-825 Wireless Party Speaker",
+        category: "Speakers",
+        price: 5200,
+        originalPrice: 6500,
+        badge: "RECOMMENDED",
+        tag: "personalized",
+        image1: "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=1000&q=85",
+        image2: "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=1000&q=85",
+        specs: "Deep Bass Stereo • Dynamic RGB Lights • IPX6 Waterproof"
+      },
+      {
+        id: 6,
+        title: "Ronin R-15 Low Latency Gaming Pods",
+        category: "Earbuds",
+        price: 4400,
+        originalPrice: 5600,
+        badge: "TOP TRENDING",
+        tag: "trending",
+        image1: "https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?auto=format&fit=crop&w=1000&q=85",
+        image2: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=1000&q=85",
+        specs: "38ms Gaming Low Latency • Breathing RGB Lights"
+      },
+      {
+        id: 7,
+        title: "Ronin R-800 Sports AMOLED Watch",
+        category: "Smartwatches",
+        price: 7200,
+        originalPrice: 8900,
+        badge: "RECOMMENDED",
+        tag: "personalized",
+        image1: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1000&q=85",
+        image2: "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=1000&q=85",
+        specs: "SpO2 & Heart Rate Tracker • 100+ Sports Modes"
+      },
+      {
+        id: 8,
+        title: "Ronin R-300 10000mAh Slim Power Bank",
+        category: "Power Banks",
+        price: 3800,
+        originalPrice: 4800,
+        badge: "BEST SELLER",
+        tag: "bestseller",
+        image1: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=1000&q=85",
+        image2: "https://images.unsplash.com/photo-1609592424109-dd9892f1b177?auto=format&fit=crop&w=1000&q=85",
+        specs: "Ultra Thin Metallic Shell • Dual Output"
+      },
+      {
+        id: 9,
+        title: "Ronin Studio Pro Over-Ear Headphones",
+        category: "Earbuds",
+        price: 9500,
+        originalPrice: 12000,
+        badge: "NEW ARRIVAL",
+        tag: "new",
+        image1: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1000&q=85",
+        image2: "https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=1000&q=85",
+        specs: "40mm Audio Drivers • Active ANC • 60H Battery"
+      },
+      {
+        id: 10,
+        title: "Ronin R-18W Fast USB Wall Adapter",
+        category: "Chargers",
+        price: 1850,
+        originalPrice: 2400,
+        badge: "BEST SELLER",
+        tag: "bestseller",
+        image1: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=1000&q=85",
+        image2: "https://images.unsplash.com/photo-1609592424109-dd9892f1b177?auto=format&fit=crop&w=1000&q=85",
+        specs: "18W Quick Charge 3.0 • Multi-Protection Safety"
+      }
+    ];
+
+    let cart = [];
+    let activeCategory = 'All';
+
+    // Carousel Controller
+    let currentSlide = 0;
+    const carouselTrack = document.getElementById('carouselTrack');
+    const totalSlides = 2;
+
+    function updateCarousel() {
+      carouselTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      updateCarousel();
+    }
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+      updateCarousel();
+    }
+    setInterval(nextSlide, 5000);
+
+    // Large View Product Card Generator with Rounded Pictures & Corners
+    function createProductCardHTML(p) {
+      const hasDiscount = p.originalPrice && p.originalPrice > p.price;
+      const discountPercent = hasDiscount ? Math.round(((p.originalPrice - p.price) / p.originalPrice) * 100) : 0;
+
+      return `
+        <div class="product-card bg-white rounded-3xl border border-gray-200 overflow-hidden flex flex-col justify-between relative group shadow-sm">
+          
+          <div class="absolute top-4 left-4 z-10 flex flex-col gap-1.5">
+            ${p.badge ? `<span class="bg-roninRed text-white text-[9px] font-black px-3 py-1 rounded-md uppercase tracking-widest shadow-sm">${p.badge}</span>` : ''}
+            ${hasDiscount ? `<span class="bg-black text-white text-[9px] font-black px-3 py-1 rounded-md uppercase tracking-widest shadow-sm">-${discountPercent}%</span>` : ''}
+          </div>
+
+          <!-- Large Rounded Image View -->
+          <div class="img-hover-swap relative h-72 sm:h-80 md:h-96 bg-[#F8F8F8] overflow-hidden flex items-center justify-center p-6 cursor-pointer">
+            <img src="${p.image1}" alt="${p.title}" class="primary-img absolute inset-0 w-full h-full object-cover p-2 rounded-2xl" />
+            <img src="${p.image2 || p.image1}" alt="${p.title}" class="secondary-img absolute inset-0 w-full h-full object-cover p-2 rounded-2xl" />
+            
+            <button onclick="addToCart(${p.id})" class="quick-add-btn absolute bottom-0 inset-x-0 bg-roninRed text-white text-xs font-black py-4 text-center uppercase tracking-wider hover:bg-black transition-colors shadow-lg">
+              Add To Cart
+            </button>
+          </div>
+
+          <div class="p-6 flex-1 flex flex-col justify-between bg-white border-t border-gray-100">
+            <div>
+              <span class="text-[10px] uppercase font-extrabold text-gray-400 tracking-wider">${p.category}</span>
+              <h3 class="text-base font-extrabold text-gray-900 line-clamp-2 mt-1.5 group-hover:text-roninRed transition-colors leading-snug">${p.title}</h3>
+              <p class="text-xs text-gray-500 mt-2 line-clamp-1 font-medium">${p.specs}</p>
+            </div>
+
+            <div class="mt-5 flex items-baseline gap-2.5 border-t pt-3">
+              <span class="text-xl font-black text-roninRed">Rs. ${p.price.toLocaleString()}</span>
+              ${hasDiscount ? `<span class="text-xs text-gray-400 line-through font-semibold">Rs. ${p.originalPrice.toLocaleString()}</span>` : ''}
+            </div>
+          </div>
+
+        </div>
+      `;
+    }
+
+    // Render All Sections
+    function renderAllSections() {
+      // 1. New Arrivals
+      const newArrivals = products.filter(p => p.tag === 'new');
+      document.getElementById('newArrivalsGrid').innerHTML = newArrivals.map(p => createProductCardHTML(p)).join('');
+
+      // 2. Top Trending
+      const trending = products.filter(p => p.tag === 'trending');
+      document.getElementById('topTrendingGrid').innerHTML = trending.map(p => createProductCardHTML(p)).join('');
+
+      // 3. Best Sellers
+      const bestSellers = products.filter(p => p.tag === 'bestseller');
+      document.getElementById('bestSellersGrid').innerHTML = bestSellers.map(p => createProductCardHTML(p)).join('');
+
+      // 4. Personalized
+      const personalized = products.filter(p => p.tag === 'personalized');
+      document.getElementById('personalizedGrid').innerHTML = personalized.map(p => createProductCardHTML(p)).join('');
+
+      // 5. Main Catalog
+      renderCatalog(products);
+    }
+
+    function renderCatalog(items) {
+      const grid = document.getElementById('productGrid');
+      if (items.length === 0) {
+        grid.innerHTML = `<div class="col-span-full py-16 text-center text-gray-500 text-sm font-semibold">No products found matching your search.</div>`;
+        return;
+      }
+      grid.innerHTML = items.map(p => createProductCardHTML(p)).join('');
+    }
+
+    // Filter & Search
+    function filterByCategory(category) {
+      activeCategory = category;
+      filterProducts();
+    }
+
+    function filterProducts() {
+      const query = document.getElementById('searchInput').value.toLowerCase();
+      let filtered = products;
+
+      if (activeCategory !== 'All') {
+        filtered = filtered.filter(p => p.category === activeCategory);
+      }
+
+      if (query.trim() !== '') {
+        filtered = filtered.filter(p => 
+          p.title.toLowerCase().includes(query) || 
+          p.category.toLowerCase().includes(query) ||
+          p.specs.toLowerCase().includes(query)
+        );
+      }
+
+      renderCatalog(filtered);
+    }
+
+    // Sorter Handler
+    function sortProducts() {
+      const mode = document.getElementById('sortSelect').value;
+      let sorted = [...products];
+
+      if (mode === 'lowToHigh') {
+        sorted.sort((a, b) => a.price - b.price);
+      } else if (mode === 'highToLow') {
+        sorted.sort((a, b) => b.price - a.price);
+      }
+
+      renderCatalog(sorted);
+    }
+
+    // Cart System
+    function addToCart(productId) {
+      const item = products.find(p => p.id === productId);
+      const existing = cart.find(c => c.id === productId);
+
+      if (existing) {
+        existing.quantity++;
+      } else {
+        cart.push({ ...item, quantity: 1 });
+      }
+
+      updateCartUI();
+      toggleCartDrawer(true);
+    }
+
+    function updateCartQuantity(productId, delta) {
+      const index = cart.findIndex(c => c.id === productId);
+      if (index !== -1) {
+        cart[index].quantity += delta;
+        if (cart[index].quantity <= 0) {
+          cart.splice(index, 1);
+        }
+      }
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      const list = document.getElementById('cartItemsList');
+      const badge = document.getElementById('cartCountBadge');
+      const subtotalEl = document.getElementById('cartSubtotal');
+
+      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+      const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+      badge.innerText = totalItems;
+      subtotalEl.innerText = `Rs. ${subtotal.toLocaleString()}`;
+
+      if (cart.length === 0) {
+        list.innerHTML = `<p class="text-center text-gray-400 text-xs py-12 font-semibold">Your shopping bag is empty.</p>`;
+        return;
+      }
+
+      list.innerHTML = cart.map(item => `
+        <div class="flex items-center justify-between gap-4 border-b border-gray-100 pb-4">
+          <img src="${item.image1}" class="w-14 h-14 object-cover rounded-xl border bg-gray-50" alt="" />
+          <div class="flex-1">
+            <h4 class="text-xs font-bold text-gray-900 line-clamp-1">${item.title}</h4>
+            <span class="text-xs text-roninRed font-black">Rs. ${(item.price * item.quantity).toLocaleString()}</span>
+          </div>
+          <div class="flex items-center border rounded-lg bg-gray-50">
+            <button onclick="updateCartQuantity(${item.id}, -1)" class="px-2.5 py-1 text-xs text-gray-600 hover:bg-gray-200 font-bold rounded-l-lg">-</button>
+            <span class="px-2.5 text-xs font-black text-gray-900">${item.quantity}</span>
+            <button onclick="updateCartQuantity(${item.id}, 1)" class="px-2.5 py-1 text-xs text-gray-600 hover:bg-gray-200 font-bold rounded-r-lg">+</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function toggleCartDrawer(forceOpen = false) {
+      const drawer = document.getElementById('cartDrawer');
+      if (forceOpen) {
+        drawer.classList.remove('hidden');
+      } else {
+        drawer.classList.toggle('hidden');
+      }
+    }
+
+    // Modal Controller
+    function openAddProductModal() {
+      document.getElementById('addProductModal').classList.remove('hidden');
+    }
+    function closeAddProductModal() {
+      document.getElementById('addProductModal').classList.add('hidden');
+    }
+    function openCheckoutModal() {
+      if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+      }
+      toggleCartDrawer(false);
+      document.getElementById('checkoutModal').classList.remove('hidden');
+    }
+    function closeCheckoutModal() {
+      document.getElementById('checkoutModal').classList.add('hidden');
+    }
+
+    // Form Handlers
+    function handleAddProduct(e) {
+      e.preventDefault();
+      const newProduct = {
+        id: Date.now(),
+        title: document.getElementById('newTitle').value,
+        category: document.getElementById('newCategory').value,
+        badge: document.getElementById('newBadge').value,
+        tag: 'new',
+        price: parseFloat(document.getElementById('newPrice').value),
+        originalPrice: parseFloat(document.getElementById('newOriginalPrice').value) || null,
+        image1: document.getElementById('newImg1').value,
+        image2: document.getElementById('newImg2').value || document.getElementById('newImg1').value,
+        specs: document.getElementById('newSpecs').value
+      };
+
+      products.unshift(newProduct);
+      renderAllSections();
+      closeAddProductModal();
+      document.getElementById('addProductForm').reset();
+      alert("New product published successfully!");
+    }
+
+    function handleOrderSubmit(e) {
+      e.preventDefault();
+      alert("Order placed successfully! Cash on Delivery confirmed.");
+      cart = [];
+      updateCartUI();
+      closeCheckoutModal();
+    }
+
+    // Initialize Page
+    renderAllSections();
+  </script>
+</body>
+</html>
