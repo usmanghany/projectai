@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy2BM | Premier Mobile & Audio Tech Store in Pakistan</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            500: '#ea580c',
+                            600: '#c2410c',
+                            700: '#9a3412',
+                            yellow: '#eab308',
+                            neon: '#0284c7'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #ffffff;
+            color: #0f172a;
+        }
+        
+        .glow-accent {
+            box-shadow: 0 10px 25px -5px rgba(234, 88, 12, 0.25);
+        }
+        .glow-neon {
+            box-shadow: 0 10px 25px -5px rgba(2, 132, 199, 0.25);
+        }
+
+        /* Glassmorphism Header */
+        .glass-header {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f8fafc;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 9999px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #ea580c;
+        }
+
+        /* Pulsing Badges */
+        .badge-pulse {
+            animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse-ring {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.08); }
+        }
+
+        .neon-border {
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        .neon-border:hover {
+            border-color: rgba(234, 88, 12, 0.5);
+            box-shadow: 0 10px 25px -5px rgba(234, 88, 12, 0.12);
+        }
+
+        /* Hero Slide Fade Transition */
+        .hero-slide {
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            pointer-events: none;
+        }
+        .hero-slide.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-500 selection:text-white custom-scrollbar bg-white text-slate-900">
+
+    <!-- TOP ANNOUNCEMENT BAR -->
+    <div class="bg-gradient-to-r from-brand-700 via-brand-600 to-brand-500 text-white text-xs font-semibold py-2.5 text-center tracking-wide flex justify-between items-center px-4 md:px-12 shadow-sm">
+        <span class="hidden md:inline-block"><i class="fa-solid fa-truck-fast mr-2"></i> Free Express Shipping Across Pakistan on Orders Over Rs. 2,999</span>
+        <span class="w-full md:w-auto text-center"><i class="fa-solid fa-fire text-yellow-300 mr-1 animate-bounce"></i> GRAND LAUNCH SALE: Up to 40% OFF on Smart Phones & Tech!</span>
+        <span class="hidden md:inline-block"><i class="fa-solid fa-shield-halved mr-2"></i> Official PTA Approved & Warranty Support</span>
+    </div>
+
+    <!-- MAIN NAVBAR WITH GLASSMORPHISM -->
+    <header class="sticky top-0 z-40 glass-header transition-all duration-300 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Brand Logo -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-amber-400 flex items-center justify-center font-black text-2xl text-white shadow-lg shadow-brand-500/20">
+                        B
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-2xl font-extrabold tracking-wider text-slate-900">BUY<span class="text-brand-500">2</span>BM</span>
+                        <span class="text-[9px] uppercase tracking-widest text-slate-500 font-bold -mt-1">Smartphones & Accessories</span>
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <nav class="hidden lg:flex items-center space-x-8 text-sm font-semibold">
+                    <a href="#categories" class="text-slate-700 hover:text-brand-500 transition">Categories</a>
+                    <a href="#showcase" class="text-slate-700 hover:text-brand-500 transition">Tech Showcase</a>
+                    <a href="#products" class="text-slate-700 hover:text-brand-500 transition">Featured Products</a>
+                    <a href="#contact" class="text-slate-700 hover:text-brand-500 transition">Contact & Support</a>
+                </nav>
+
+                <!-- Search & Actions -->
+                <div class="flex items-center space-x-4">
+                    <!-- Live Search Input -->
+                    <div class="relative hidden sm:block w-48 md:w-64">
+                        <input type="text" id="searchInput" oninput="filterProducts()" placeholder="Search phones, earbuds..." 
+                            class="w-full bg-slate-100 border border-slate-200 rounded-full py-2 pl-9 pr-4 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-brand-500 focus:bg-white transition">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-400 text-xs"></i>
+                    </div>
+
+                    <!-- Add Product Button (Seller Panel Trigger) -->
+                    <button onclick="openAddProductModal()" class="hidden md:flex items-center space-x-2 bg-white hover:bg-slate-50 border border-slate-200 hover:border-brand-500/50 text-slate-700 text-xs px-3.5 py-2 rounded-full transition shadow-sm">
+                        <i class="fa-solid fa-plus-circle text-brand-500"></i>
+                        <span>Add Product</span>
+                    </button>
+
+                    <!-- Cart Drawer Trigger -->
+                    <button onclick="toggleCart()" class="relative p-2.5 bg-white hover:bg-slate-50 border border-slate-200 rounded-full text-slate-700 transition shadow-sm">
+                        <i class="fa-solid fa-bag-shopping text-base"></i>
+                        <span id="cartCountBadge" class="absolute -top-1 -right-1 bg-brand-500 text-white font-extrabold text-[10px] w-5 h-5 rounded-full flex items-center justify-center shadow-md">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO DYNAMIC BANNER SLIDER -->
+    <section class="relative w-full overflow-hidden bg-slate-900 text-white" style="height: 520px;">
+        
+        <div id="heroSlider" class="relative w-full h-full">
+            
+            <!-- Slide 1: Flagship Smartphones -->
+            <div class="hero-slide active absolute inset-0 w-full h-full flex items-center">
+                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1920&q=80" alt="Flagship Smartphones Banner" class="absolute inset-0 w-full h-full object-cover object-center">
+                <div class="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-900/60 to-transparent"></div>
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+                    <div class="max-w-xl space-y-4">
+                        <span class="inline-flex items-center space-x-2 bg-brand-500/90 backdrop-blur-md text-white text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-widest badge-pulse">
+                            <i class="fa-solid fa-mobile-screen-button mr-1"></i> Official PTA Approved
+                        </span>
+                        <h1 class="text-3xl sm:text-5xl font-black text-white leading-tight">
+                            FLAGSHIP <br><span class="text-brand-500">SMARTPHONES</span>
+                        </h1>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed">
+                            Experience next-level display tech, ultra-crisp cameras, and all-day battery life with genuine manufacturer warranties.
+                        </p>
+                        <div class="flex items-center space-x-4 pt-2">
+                            <button onclick="filterCategory('Smartphones'); window.location.href='#products';" class="bg-brand-500 hover:bg-brand-600 text-white font-extrabold px-6 py-3 rounded-xl text-xs uppercase tracking-wider transition shadow-lg shadow-brand-500/30">
+                                Shop Smartphones
+                            </button>
+                            <span class="text-xl font-black text-amber-400">From Rs. 89,999</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2: Audio / TWS -->
+            <div class="hero-slide absolute inset-0 w-full h-full flex items-center">
+                <img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=1920&q=80" alt="Audio Banner" class="absolute inset-0 w-full h-full object-cover object-center">
+                <div class="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-900/60 to-transparent"></div>
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+                    <div class="max-w-xl space-y-4">
+                        <span class="inline-flex items-center space-x-2 bg-sky-600/90 backdrop-blur-md text-white text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-widest badge-pulse">
+                            <i class="fa-solid fa-bolt text-amber-300 mr-1"></i> Active Noise Cancellation
+                        </span>
+                        <h1 class="text-3xl sm:text-5xl font-black text-white leading-tight">
+                            BUY2BM SONICPRO <br><span class="text-sky-400">WIRELESS AUDIO</span>
+                        </h1>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed">
+                            Immerse yourself in true studio quality sound with 35 hours of total playback, dual dynamic drivers, and low latency mode.
+                        </p>
+                        <div class="flex items-center space-x-4 pt-2">
+                            <button onclick="filterCategory('Earbuds'); window.location.href='#products';" class="bg-sky-500 hover:bg-sky-600 text-white font-extrabold px-6 py-3 rounded-xl text-xs uppercase tracking-wider transition shadow-lg shadow-sky-500/30">
+                                Shop Audio Series
+                            </button>
+                            <span class="text-xl font-black text-amber-400">Rs. 6,499</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: GaN Fast Chargers -->
+            <div class="hero-slide absolute inset-0 w-full h-full flex items-center">
+                <img src="https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=1920&q=80" alt="GaN Charger Banner" class="absolute inset-0 w-full h-full object-cover object-center">
+                <div class="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-900/60 to-transparent"></div>
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+                    <div class="max-w-xl space-y-4">
+                        <span class="inline-flex items-center space-x-2 bg-amber-500/90 backdrop-blur-md text-slate-950 text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-widest">
+                            <i class="fa-solid fa-microchip mr-1"></i> GaN3 Semiconductor
+                        </span>
+                        <h1 class="text-3xl sm:text-5xl font-black text-white leading-tight">
+                            65W FAST CHARGE <br><span class="text-amber-400">POCKET POWERHOUSE</span>
+                        </h1>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed">
+                            Charge laptops, smartphones, and tablets simultaneously. Intelligent temperature regulation ensures cool & fast power delivery.
+                        </p>
+                        <div class="flex items-center space-x-4 pt-2">
+                            <button onclick="filterCategory('Chargers'); window.location.href='#products';" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold px-6 py-3 rounded-xl text-xs uppercase tracking-wider transition shadow-lg shadow-amber-500/30">
+                                Get GaN Charger
+                            </button>
+                            <span class="text-xl font-black text-white">Rs. 4,299</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Slider Navigation Arrows -->
+        <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/20 hover:bg-white/40 text-white flex items-center justify-center backdrop-blur-sm transition">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/20 hover:bg-white/40 text-white flex items-center justify-center backdrop-blur-sm transition">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+
+        <!-- Slider Pagination Indicators -->
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex space-x-2.5" id="sliderDots">
+            <button onclick="goToSlide(0)" class="w-8 h-2 rounded-full bg-white transition-all duration-300"></button>
+            <button onclick="goToSlide(1)" class="w-2.5 h-2 rounded-full bg-white/40 transition-all duration-300"></button>
+            <button onclick="goToSlide(2)" class="w-2.5 h-2 rounded-full bg-white/40 transition-all duration-300"></button>
+        </div>
+
+    </section>
+
+    <!-- VISUAL FEATURED CATEGORY SHOWCASE -->
+    <section id="showcase" class="py-20 bg-white border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-2xl mx-auto mb-14">
+                <span class="text-xs font-extrabold text-brand-600 uppercase tracking-widest bg-brand-50 px-3.5 py-1.5 rounded-full border border-brand-200">
+                    High Performance Hardware
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-black text-slate-900 mt-3">Featured Tech Lineup</h2>
+                <p class="text-slate-500 text-sm mt-2">Explore flagship smartphones, hi-res sound, and continuous power delivery equipment.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Showcase Card 1: Smartphones -->
+                <div class="relative bg-slate-50 rounded-3xl border border-slate-200 overflow-hidden group neon-border">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=800&q=80" alt="Smartphones" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
+                        <span class="absolute top-4 left-4 bg-brand-500 text-white font-black text-[10px] px-3 py-1 rounded-full uppercase tracking-wider glow-accent">
+                            PTA Approved
+                        </span>
+                    </div>
+                    <div class="p-6 relative z-10 bg-white border-t border-slate-100">
+                        <h3 class="text-xl font-bold text-slate-900">Latest Smartphones</h3>
+                        <p class="text-xs text-slate-500 mt-2 leading-relaxed">Apple, Samsung, Xiaomi, and Vivo devices with official warranty support.</p>
+                        <button onclick="filterCategory('Smartphones'); window.location.href='#products';" class="mt-4 text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center">
+                            Browse Smartphones <i class="fa-solid fa-chevron-right ml-1 text-[10px]"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Showcase Card 2: Wireless Audio -->
+                <div class="relative bg-slate-50 rounded-3xl border border-slate-200 overflow-hidden group neon-border">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=800&q=80" alt="Audio Tech" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
+                        <span class="absolute top-4 left-4 bg-sky-500 text-white font-black text-[10px] px-3 py-1 rounded-full uppercase tracking-wider glow-neon">
+                            Active Noise Cancellation
+                        </span>
+                    </div>
+                    <div class="p-6 relative z-10 bg-white border-t border-slate-100">
+                        <h3 class="text-xl font-bold text-slate-900">Hi-Res Audio & Earbuds</h3>
+                        <p class="text-xs text-slate-500 mt-2 leading-relaxed">Dual dynamic drivers, ultra-low latency gaming modes, and ergonomic noise isolation.</p>
+                        <button onclick="filterCategory('Earbuds'); window.location.href='#products';" class="mt-4 text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center">
+                            Browse Audio Collection <i class="fa-solid fa-chevron-right ml-1 text-[10px]"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Showcase Card 3: GaN Chargers -->
+                <div class="relative bg-slate-50 rounded-3xl border border-slate-200 overflow-hidden group neon-border">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=800&q=80" alt="Chargers" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
+                        <span class="absolute top-4 left-4 bg-amber-400 text-slate-950 font-black text-[10px] px-3 py-1 rounded-full uppercase tracking-wider">
+                            GaN Fast Tech
+                        </span>
+                    </div>
+                    <div class="p-6 relative z-10 bg-white border-t border-slate-100">
+                        <h3 class="text-xl font-bold text-slate-900">GaN Fast Adapters</h3>
+                        <p class="text-xs text-slate-500 mt-2 leading-relaxed">Compact semiconductor fast chargers supporting PD3.0, Quick Charge, and laptop power.</p>
+                        <button onclick="filterCategory('Chargers'); window.location.href='#products';" class="mt-4 text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center">
+                            Browse Fast Chargers <i class="fa-solid fa-chevron-right ml-1 text-[10px]"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CATEGORY GRID -->
+    <section id="categories" class="py-16 bg-white border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
+                <div>
+                    <h2 class="text-xs font-bold text-brand-600 uppercase tracking-widest mb-1">Browse By Category</h2>
+                    <p class="text-2xl sm:text-3xl font-extrabold text-slate-900">Gear Built For Every Device</p>
+                </div>
+                <div class="mt-4 md:mt-0 flex flex-wrap gap-2">
+                    <button onclick="filterCategory('All')" class="category-btn active bg-brand-500 text-white px-4 py-2 rounded-full text-xs font-bold transition shadow-sm">All Products</button>
+                    <button onclick="filterCategory('Smartphones')" class="category-btn bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 px-4 py-2 rounded-full text-xs font-bold transition">Smartphones</button>
+                    <button onclick="filterCategory('Earbuds')" class="category-btn bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 px-4 py-2 rounded-full text-xs font-bold transition">Earbuds & Audio</button>
+                    <button onclick="filterCategory('Chargers')" class="category-btn bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 px-4 py-2 rounded-full text-xs font-bold transition">Fast Chargers</button>
+                    <button onclick="filterCategory('Power Banks')" class="category-btn bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 px-4 py-2 rounded-full text-xs font-bold transition">Power Banks</button>
+                </div>
+            </div>
+
+            <!-- Quick Visual Category Tiles -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-4">
+                
+                <div onclick="filterCategory('Smartphones')" class="bg-slate-50 hover:bg-white border border-slate-200 hover:border-brand-500/50 p-4 rounded-2xl text-center cursor-pointer transition transform hover:-translate-y-1 shadow-sm">
+                    <div class="w-12 h-12 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center mx-auto mb-3 text-xl">
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+                    </div>
+                    <div class="text-sm font-bold text-slate-900">Smartphones</div>
+                    <div class="text-[11px] text-slate-500">PTA Approved</div>
+                </div>
+
+                <div onclick="filterCategory('Earbuds')" class="bg-slate-50 hover:bg-white border border-slate-200 hover:border-brand-500/50 p-4 rounded-2xl text-center cursor-pointer transition transform hover:-translate-y-1 shadow-sm">
+                    <div class="w-12 h-12 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center mx-auto mb-3 text-xl">
+                        <i class="fa-solid fa-headphones-simple"></i>
+                    </div>
+                    <div class="text-sm font-bold text-slate-900">Earbuds</div>
+                    <div class="text-[11px] text-slate-500">ANC & ENC Tech</div>
+                </div>
+
+                <div onclick="filterCategory('Chargers')" class="bg-slate-50 hover:bg-white border border-slate-200 hover:border-brand-500/50 p-4 rounded-2xl text-center cursor-pointer transition transform hover:-translate-y-1 shadow-sm">
+                    <div class="w-12 h-12 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center mx-auto mb-3 text-xl">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <div class="text-sm font-bold text-slate-900">Fast Chargers</div>
+                    <div class="text-[11px] text-slate-500">20W to 120W</div>
+                </div>
+
+                <div onclick="filterCategory('Power Banks')" class="bg-slate-50 hover:bg-white border border-slate-200 hover:border-brand-500/50 p-4 rounded-2xl text-center cursor-pointer transition transform hover:-translate-y-1 shadow-sm">
+                    <div class="w-12 h-12 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center mx-auto mb-3 text-xl">
+                        <i class="fa-solid fa-battery-full"></i>
+                    </div>
+                    <div class="text-sm font-bold text-slate-900">Power Banks</div>
+                    <div class="text-[11px] text-slate-500">MagSafe & PD</div>
+                </div>
+
+                <div onclick="filterCategory('Cables')" class="bg-slate-50 hover:bg-white border border-slate-200 hover:border-brand-500/50 p-4 rounded-2xl text-center cursor-pointer transition transform hover:-translate-y-1 shadow-sm">
+                    <div class="w-12 h-12 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center mx-auto mb-3 text-xl">
+                        <i class="fa-solid fa-plug"></i>
+                    </div>
+                    <div class="text-sm font-bold text-slate-900">Cables</div>
+                    <div class="text-[11px] text-slate-500">Type-C & Lightning</div>
+                </div>
+
+                <div onclick="filterCategory('Smartwatches')" class="bg-slate-50 hover:bg-white border border-slate-200 hover:border-brand-500/50 p-4 rounded-2xl text-center cursor-pointer transition transform hover:-translate-y-1 shadow-sm">
+                    <div class="w-12 h-12 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center mx-auto mb-3 text-xl">
+                        <i class="fa-solid fa-stopwatch"></i>
+                    </div>
+                    <div class="text-sm font-bold text-slate-900">Smartwatches</div>
+                    <div class="text-[11px] text-slate-500">AMOLED Display</div>
+                </div>
+
+                <div onclick="filterCategory('Cases')" class="bg-slate-50 hover:bg-white border border-slate-200 hover:border-brand-500/50 p-4 rounded-2xl text-center cursor-pointer transition transform hover:-translate-y-1 shadow-sm">
+                    <div class="w-12 h-12 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center mx-auto mb-3 text-xl">
+                        <i class="fa-solid fa-mobile-screen"></i>
+                    </div>
+                    <div class="text-sm font-bold text-slate-900">Covers & Glass</div>
+                    <div class="text-[11px] text-slate-500">Armor Protection</div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- MAIN PRODUCT CATALOG SECTION -->
+    <section id="products" class="py-16 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 pb-4 border-b border-slate-200">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-black text-slate-900">Store Catalog</h2>
+                    <p class="text-xs text-slate-500 mt-1">Showing items in <span class="text-brand-600 font-bold">Pakistani Rupees (PKR)</span></p>
+                </div>
+
+                <!-- Sorting Controls -->
+                <div class="mt-4 sm:mt-0 flex items-center space-x-3">
+                    <label class="text-xs text-slate-500 font-medium">Sort By:</label>
+                    <select id="sortSelect" onchange="renderProducts()" class="bg-white border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-brand-500 shadow-sm">
+                        <option value="featured">Featured / Best Selling</option>
+                        <option value="low">Price: Low to High</option>
+                        <option value="high">Price: High to Low</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Product Grid Container -->
+            <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Dynamically populated via JavaScript -->
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CONTACT & BULK INQUIRIES FORM SECTION -->
+    <section id="contact" class="py-20 bg-white border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Side: Information -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-brand-50 text-brand-600 text-xs font-bold uppercase tracking-widest border border-brand-200">
+                        <span>Contact & Support</span>
+                    </div>
+
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+                        Need Help or Wholesale Inquiries?
+                    </h2>
+
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Have questions about your order, PTA approval status, warranty claims, or looking for corporate/wholesale bulk purchases in Pakistan? Fill out the form and our team will reach out within 24 hours.
+                    </p>
+
+                    <div class="space-y-4 pt-4">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-brand-600 shrink-0">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-500">Call / WhatsApp Support</div>
+                                <div class="text-sm font-bold text-slate-900">+92 (300) 123-4567</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-brand-600 shrink-0">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-500">Email Address</div>
+                                <div class="text-sm font-bold text-slate-900">support@buy2bm.pk</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-brand-600 shrink-0">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-500">Main Office</div>
+                                <div class="text-sm font-bold text-slate-900">Hafeez Center, Gulberg III, Lahore, Pakistan</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Side: Contact Form -->
+                <div class="lg:col-span-7 bg-slate-50 border border-slate-200 p-6 sm:p-8 rounded-3xl shadow-sm">
+                    <form onsubmit="handleContactSubmit(event)" class="space-y-5">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Full Name *</label>
+                                <input type="text" required placeholder="Usman Ghani" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 focus:outline-none focus:border-brand-500 transition shadow-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Phone / WhatsApp *</label>
+                                <input type="tel" required placeholder="0300 1234567" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 focus:outline-none focus:border-brand-500 transition shadow-sm">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Inquiry Type</label>
+                                <select class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 focus:outline-none focus:border-brand-500 transition shadow-sm">
+                                    <option>General Customer Support</option>
+                                    <option>Smartphone PTA Query</option>
+                                    <option>Warranty Claim Request</option>
+                                    <option>Bulk / Wholesale Purchase Inquiry</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">City</label>
+                                <input type="text" placeholder="Lahore / Karachi / Islamabad" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 focus:outline-none focus:border-brand-500 transition shadow-sm">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Your Message / Order Details</label>
+                            <textarea rows="4" placeholder="Detail your query or order requirements here..." class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 focus:outline-none focus:border-brand-500 transition shadow-sm"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full bg-gradient-to-r from-brand-600 to-brand-500 hover:from-brand-500 hover:to-brand-600 text-white font-extrabold py-4 rounded-xl shadow-lg shadow-brand-500/20 text-sm uppercase tracking-wider transition transform hover:-translate-y-0.5">
+                            Submit Inquiry <i class="fa-solid fa-paper-plane ml-2"></i>
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 border-t border-slate-800 py-12 text-slate-400 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-8 h-8 rounded-lg bg-brand-500 flex items-center justify-center font-black text-white text-lg">B</div>
+                        <span class="text-xl font-extrabold text-white">BUY<span class="text-brand-500">2</span>BM</span>
+                    </div>
+                    <p class="text-slate-400 leading-relaxed">
+                        Pakistan's trusted online store for genuine smartphones, mobile accessories, high-speed chargers, and premium audio gear.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4">Quick Links</h4>
+                    <ul class="space-y-2.5">
+                        <li><a href="#categories" onclick="filterCategory('Smartphones')" class="hover:text-brand-500 transition">Smartphones</a></li>
+                        <li><a href="#categories" onclick="filterCategory('Earbuds')" class="hover:text-brand-500 transition">Wireless Earbuds</a></li>
+                        <li><a href="#categories" onclick="filterCategory('Chargers')" class="hover:text-brand-500 transition">GaN Fast Chargers</a></li>
+                        <li><a href="#categories" onclick="filterCategory('Power Banks')" class="hover:text-brand-500 transition">Power Banks</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4">Customer Care</h4>
+                    <ul class="space-y-2.5">
+                        <li><a href="#contact" class="hover:text-brand-500 transition">PTA Approval & Verification</a></li>
+                        <li><a href="#contact" class="hover:text-brand-500 transition">Warranty Claim Policy</a></li>
+                        <li><a href="#contact" class="hover:text-brand-500 transition">Shipping & Delivery Info</a></li>
+                        <li><a href="#contact" class="hover:text-brand-500 transition">Bulk Corporate Orders</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4">Accepted Payment Methods</h4>
+                    <p class="mb-4">Cash on Delivery (COD) available nationwide across Pakistan.</p>
+                    <div class="flex space-x-3 text-2xl text-slate-300">
+                        <i class="fa-solid fa-money-bill-wave text-brand-500"></i>
+                        <i class="fa-brands fa-cc-visa"></i>
+                        <i class="fa-brands fa-cc-mastercard"></i>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="pt-8 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between text-center md:text-left space-y-4 md:space-y-0">
+                <div>&copy; 2026 Buy2BM Pakistan. All Rights Reserved.</div>
+                <div class="flex space-x-4">
+                    <a href="#" class="hover:text-brand-500"><i class="fa-brands fa-facebook-f text-base"></i></a>
+                    <a href="#" class="hover:text-brand-500"><i class="fa-brands fa-instagram text-base"></i></a>
+                    <a href="#" class="hover:text-brand-500"><i class="fa-brands fa-whatsapp text-base"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SLIDING CART SIDEBAR -->
+    <div id="cartDrawer" class="fixed inset-y-0 right-0 z-50 w-full max-w-md bg-white border-l border-slate-200 transform translate-x-full transition-transform duration-300 ease-in-out shadow-2xl flex flex-col">
+        
+        <!-- Cart Header -->
+        <div class="p-6 border-b border-slate-200 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <i class="fa-solid fa-bag-shopping text-brand-600 text-xl"></i>
+                <h3 class="text-lg font-bold text-slate-900">Your Shopping Cart</h3>
+            </div>
+            <button onclick="toggleCart()" class="text-slate-400 hover:text-slate-700 text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <!-- Cart Items List -->
+        <div id="cartItemsContainer" class="flex-1 overflow-y-auto p-6 space-y-4 custom-scrollbar">
+            <!-- Dynamically Rendered Cart Items -->
+        </div>
+
+        <!-- Cart Footer / Summary -->
+        <div class="p-6 border-t border-slate-200 bg-slate-50 space-y-4">
+            <div class="space-y-2 text-xs">
+                <div class="flex justify-between text-slate-600">
+                    <span>Subtotal</span>
+                    <span id="cartSubtotal" class="text-slate-900 font-bold">Rs. 0</span>
+                </div>
+                <div class="flex justify-between text-slate-600">
+                    <span>Delivery (Pakistan)</span>
+                    <span class="text-brand-600 font-bold">FREE</span>
+                </div>
+                <div class="flex justify-between text-sm text-slate-900 font-extrabold pt-2 border-t border-slate-200">
+                    <span>Total (PKR)</span>
+                    <span id="cartTotal" class="text-brand-600">Rs. 0</span>
+                </div>
+            </div>
+
+            <button onclick="openCheckoutModal()" class="w-full bg-brand-500 hover:bg-brand-600 text-white font-extrabold py-3.5 rounded-xl text-sm uppercase tracking-wider transition shadow-lg shadow-brand-500/20">
+                Proceed to Checkout <i class="fa-solid fa-arrow-right ml-2"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- ADD PRODUCT MODAL (SELLER DASHBOARD) -->
+    <div id="addProductModal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white border border-slate-200 rounded-3xl w-full max-w-xl p-6 sm:p-8 shadow-2xl space-y-6">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-4">
+                <h3 class="text-lg font-bold text-slate-900 flex items-center">
+                    <i class="fa-solid fa-plus-circle text-brand-600 mr-2"></i> Add New Product to Store
+                </h3>
+                <button onclick="closeAddProductModal()" class="text-slate-400 hover:text-slate-700">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <form onsubmit="handleAddNewProduct(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Product Title *</label>
+                    <input type="text" id="newTitle" required placeholder="Apple iPhone 15 Pro Max" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-brand-500">
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Category *</label>
+                        <select id="newCategory" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-brand-500">
+                            <option value="Smartphones">Smartphones</option>
+                            <option value="Earbuds">Wireless Earbuds</option>
+                            <option value="Chargers">Fast Chargers</option>
+                            <option value="Power Banks">Power Banks</option>
+                            <option value="Cables">Braided Cables</option>
+                            <option value="Smartwatches">Smartwatches</option>
+                            <option value="Cases">Covers & Protection</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Price in PKR (Rs.) *</label>
+                        <input type="number" id="newPrice" required placeholder="485000" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-brand-500">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Original Strike Price (Rs.)</label>
+                        <input type="number" id="newOriginalPrice" placeholder="510000" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-brand-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Badge Tag</label>
+                        <select id="newBadge" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-brand-500">
+                            <option value="New">New Arrival</option>
+                            <option value="Hot">Best Seller</option>
+                            <option value="Sale">Grand Sale</option>
+                            <option value="PTA Approved">PTA Approved</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Product Image Source</label>
+                    <div class="space-y-2">
+                        <input type="url" id="newImageUrl" placeholder="Paste Image URL or choose file below..." class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-brand-500">
+                        <div class="text-center text-xs text-slate-400">--- OR Upload Local Image File ---</div>
+                        <input type="file" id="newFileInput" accept="image/*" onchange="previewLocalImage(event)" class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-brand-50 file:text-brand-600 hover:file:bg-brand-100">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Specs / Short Description</label>
+                    <input type="text" id="newSpecs" placeholder="e.g., 256GB • A17 Pro Chip • Natural Titanium" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-brand-500">
+                </div>
+
+                <button type="submit" class="w-full bg-brand-500 hover:bg-brand-600 text-white font-bold py-3 rounded-xl text-sm transition shadow-md">
+                    Publish Product To Buy2BM
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- CHECKOUT MODAL -->
+    <div id="checkoutModal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white border border-slate-200 rounded-3xl w-full max-w-lg p-6 sm:p-8 shadow-2xl space-y-6">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-4">
+                <h3 class="text-lg font-bold text-slate-900 flex items-center">
+                    <i class="fa-solid fa-truck-fast text-brand-600 mr-2"></i> Express Cash On Delivery
+                </h3>
+                <button onclick="closeCheckoutModal()" class="text-slate-400 hover:text-slate-700">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <form onsubmit="handlePlaceOrder(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Full Delivery Name *</label>
+                    <input type="text" required placeholder="Usman Ghani" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-brand-500">
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Mobile Number *</label>
+                        <input type="tel" required placeholder="0300 1234567" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-brand-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-700 mb-1">City *</label>
+                        <input type="text" required placeholder="Lahore / Karachi" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-brand-500">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Complete House Address *</label>
+                    <input type="text" required placeholder="House #, Street, Area Name" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-brand-500">
+                </div>
+
+                <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl flex items-center justify-between text-xs">
+                    <span class="text-slate-600">Total Amount Payable on Delivery:</span>
+                    <span id="checkoutTotalText" class="text-base font-extrabold text-brand-600">Rs. 0</span>
+                </div>
+
+                <button type="submit" class="w-full bg-brand-500 hover:bg-brand-600 text-white font-extrabold py-3.5 rounded-xl text-sm uppercase tracking-wider transition shadow-lg shadow-brand-500/20">
+                    Confirm Order (Cash On Delivery)
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // DEFAULT CATALOG PRODUCTS WITH SMARTPHONES & ACCESSORIES
+        let products = [
+            // SMARTPHONES CATEGORY
+            {
+                id: 101,
+                title: "Apple iPhone 15 Pro Max",
+                category: "Smartphones",
+                price: 485000,
+                originalPrice: 510000,
+                badge: "PTA Approved",
+                image: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=800&q=80",
+                specs: "256GB Titanium • A17 Pro Chip • 5X Telephoto Lens"
+            },
+            {
+                id: 102,
+                title: "Samsung Galaxy S24 Ultra",
+                category: "Smartphones",
+                price: 399999,
+                originalPrice: 430000,
+                badge: "Hot",
+                image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=800&q=80",
+                specs: "12GB RAM • 512GB • Snapdragon 8 Gen 3 • S-Pen Included"
+            },
+            {
+                id: 103,
+                title: "Xiaomi 14 Ultra 5G",
+                category: "Smartphones",
+                price: 289999,
+                originalPrice: 315000,
+                badge: "New",
+                image: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=800&q=80",
+                specs: "Leica Quad Camera • 90W Fast Charge • 16GB RAM / 512GB"
+            },
+            {
+                id: 104,
+                title: "Xiaomi Redmi Note 13 Pro+",
+                category: "Smartphones",
+                price: 114999,
+                originalPrice: 125000,
+                badge: "Sale",
+                image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80",
+                specs: "200MP OIS Camera • 120W HyperCharge • Curved AMOLED"
+            },
+            // AUDIO & ACCESSORIES CATEGORY
+            {
+                id: 1,
+                title: "Buy2BM SonicPro TWS ANC Earbuds",
+                category: "Earbuds",
+                price: 6499,
+                originalPrice: 9999,
+                badge: "Hot",
+                image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=800&q=80",
+                specs: "Active Noise Cancellation • 35H Battery • Low Latency"
+            },
+            {
+                id: 2,
+                title: "Buy2BM 65W GaN3 Ultra Fast Charger",
+                category: "Chargers",
+                price: 4299,
+                originalPrice: 5999,
+                badge: "New",
+                image: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=800&q=80",
+                specs: "Dual Type-C + USB • PPS Fast Charge • Laptop Compatible"
+            },
+            {
+                id: 3,
+                title: "Buy2BM MagSafe 20,000mAh Power Bank",
+                category: "Power Banks",
+                price: 7999,
+                originalPrice: 11999,
+                badge: "Sale",
+                image: "https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?auto=format&fit=crop&w=800&q=80",
+                specs: "22.5W Fast Charge • Magnetic Snap • LED Percentage Display"
+            },
+            {
+                id: 4,
+                title: "Buy2BM Kevlar 100W Type-C Braided Cable",
+                category: "Cables",
+                price: 1299,
+                originalPrice: 1999,
+                badge: "Hot",
+                image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80",
+                specs: "2 Meters • High Speed Data Sync • Reinforced Stress Joints"
+            },
+            {
+                id: 5,
+                title: "Buy2BM Horizon Ultra AMOLED Smartwatch",
+                category: "Smartwatches",
+                price: 9499,
+                originalPrice: 13999,
+                badge: "New",
+                image: "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=800&q=80",
+                specs: "Bluetooth Calling • IP68 Water Resistant • Heart Rate & SpO2"
+            },
+            {
+                id: 6,
+                title: "Buy2BM Armor Shield MagSafe Case",
+                category: "Cases",
+                price: 1899,
+                originalPrice: 2499,
+                badge: "Sale",
+                image: "https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?auto=format&fit=crop&w=800&q=80",
+                specs: "Military Grade Drop Protection • Anti-Yellowing Clear"
+            }
+        ];
+
+        let cart = [];
+        let currentCategory = 'All';
+        let tempLocalImageBase64 = '';
+        let currentSlideIndex = 0;
+        let slideInterval = null;
+
+        // INITIAL RENDER & SLIDER START
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+            updateCartUI();
+            initRandomizedSlider();
+        });
+
+        // HERO BANNER SLIDER LOGIC
+        function initRandomizedSlider() {
+            const slides = document.querySelectorAll('.hero-slide');
+            currentSlideIndex = Math.floor(Math.random() * slides.length);
+            showSlide(currentSlideIndex);
+            startSlideTimer();
+        }
+
+        function startSlideTimer() {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(() => {
+                nextSlide();
+            }, 5000);
+        }
+
+        function showSlide(index) {
+            const slides = document.querySelectorAll('.hero-slide');
+            const dots = document.querySelectorAll('#sliderDots button');
+
+            if (index >= slides.length) currentSlideIndex = 0;
+            else if (index < 0) currentSlideIndex = slides.length - 1;
+            else currentSlideIndex = index;
+
+            slides.forEach((slide, idx) => {
+                if (idx === currentSlideIndex) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+
+            dots.forEach((dot, idx) => {
+                if (idx === currentSlideIndex) {
+                    dot.className = 'w-8 h-2 rounded-full bg-white transition-all duration-300';
+                } else {
+                    dot.className = 'w-2.5 h-2 rounded-full bg-white/40 transition-all duration-300';
+                }
+            });
+        }
+
+        function nextSlide() {
+            showSlide(currentSlideIndex + 1);
+            startSlideTimer();
+        }
+
+        function prevSlide() {
+            showSlide(currentSlideIndex - 1);
+            startSlideTimer();
+        }
+
+        function goToSlide(index) {
+            showSlide(index);
+            startSlideTimer();
+        }
+
+        // RENDER PRODUCT CATALOG
+        function renderProducts() {
+            const grid = document.getElementById('productGrid');
+            const searchVal = document.getElementById('searchInput').value.toLowerCase();
+            const sortVal = document.getElementById('sortSelect').value;
+
+            let filtered = products.filter(p => {
+                const matchesCategory = (currentCategory === 'All') || (p.category === currentCategory);
+                const matchesSearch = p.title.toLowerCase().includes(searchVal) || p.specs.toLowerCase().includes(searchVal);
+                return matchesCategory && matchesSearch;
+            });
+
+            if (sortVal === 'low') {
+                filtered.sort((a, b) => a.price - b.price);
+            } else if (sortVal === 'high') {
+                filtered.sort((a, b) => b.price - a.price);
+            }
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full py-12 text-center text-slate-400">
+                        <i class="fa-solid fa-box-open text-4xl mb-3"></i>
+                        <p class="text-sm">No products found in this category.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = filtered.map(p => `
+                <div class="bg-white border border-slate-200 hover:border-brand-500/50 rounded-2xl p-4 flex flex-col justify-between transition-all duration-300 hover:shadow-lg group">
+                    <div>
+                        <!-- Product Image & Badges -->
+                        <div class="relative overflow-hidden rounded-xl mb-4 bg-slate-100">
+                            <span class="absolute top-2 left-2 z-10 bg-brand-500 text-white font-extrabold text-[10px] px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm">
+                                ${p.badge}
+                            </span>
+                            <img src="${p.image}" alt="${p.title}" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+
+                        <!-- Details -->
+                        <div class="text-xs font-bold text-brand-600 mb-1 uppercase tracking-wider">${p.category}</div>
+                        <h3 class="text-base font-bold text-slate-900 mb-1 line-clamp-1">${p.title}</h3>
+                        <p class="text-xs text-slate-500 line-clamp-2 mb-4 leading-relaxed">${p.specs}</p>
+                    </div>
+
+                    <!-- Pricing & Action -->
+                    <div>
+                        <div class="flex items-baseline justify-between mb-3 border-t border-slate-100 pt-3">
+                            <div>
+                                <span class="text-lg font-black text-slate-900">Rs. ${p.price.toLocaleString()}</span>
+                                ${p.originalPrice ? `<span class="text-xs text-slate-400 line-through ml-1.5">Rs. ${p.originalPrice.toLocaleString()}</span>` : ''}
+                            </div>
+                            <span class="text-[10px] text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">In Stock</span>
+                        </div>
+
+                        <button onclick="addToCart(${p.id})" class="w-full bg-slate-100 hover:bg-brand-500 text-slate-700 hover:text-white border border-slate-200 hover:border-brand-500 font-bold py-2.5 rounded-xl text-xs transition flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-cart-plus"></i>
+                            <span>Add To Cart</span>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // FILTER BY CATEGORY
+        function filterCategory(cat) {
+            currentCategory = cat;
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-brand-500', 'text-white', 'shadow-sm');
+                btn.classList.add('bg-slate-100', 'text-slate-700');
+            });
+            
+            // Highlight matching filter button if clicked
+            const btnList = Array.from(document.querySelectorAll('.category-btn'));
+            const matchingBtn = btnList.find(b => b.innerText.toLowerCase().includes(cat.toLowerCase()));
+            if (matchingBtn) {
+                matchingBtn.classList.add('active', 'bg-brand-500', 'text-white', 'shadow-sm');
+                matchingBtn.classList.remove('bg-slate-100', 'text-slate-700');
+            }
+
+            renderProducts();
+        }
+
+        // LIVE SEARCH FILTER
+        function filterProducts() {
+            renderProducts();
+        }
+
+        // CART LOGIC
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existing = cart.find(item => item.id === productId);
+
+            if (existing) {
+                existing.quantity++;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+
+            updateCartUI();
+            toggleCart(true);
+            showNotification(`${product.title} added to your cart!`);
+        }
+
+        function updateQuantity(productId, delta) {
+            const item = cart.find(i => i.id === productId);
+            if (item) {
+                item.quantity += delta;
+                if (item.quantity <= 0) {
+                    cart = cart.filter(i => i.id !== productId);
+                }
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const container = document.getElementById('cartItemsContainer');
+            const badge = document.getElementById('cartCountBadge');
+            const subtotalText = document.getElementById('cartSubtotal');
+            const totalText = document.getElementById('cartTotal');
+
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            badge.innerText = totalItems;
+
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            subtotalText.innerText = `Rs. ${subtotal.toLocaleString()}`;
+            totalText.innerText = `Rs. ${subtotal.toLocaleString()}`;
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="py-16 text-center text-slate-400 space-y-3">
+                        <i class="fa-solid fa-bag-shopping text-4xl"></i>
+                        <p class="text-sm">Your cart is currently empty.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = cart.map(item => `
+                <div class="flex items-center space-x-3 bg-slate-50 p-3 rounded-xl border border-slate-200">
+                    <img src="${item.image}" alt="${item.title}" class="w-14 h-14 object-cover rounded-lg">
+                    <div class="flex-1">
+                        <h4 class="text-xs font-bold text-slate-900 line-clamp-1">${item.title}</h4>
+                        <div class="text-xs text-brand-600 font-extrabold mt-1">Rs. ${item.price.toLocaleString()}</div>
+                    </div>
+                    <div class="flex items-center space-x-2 bg-white border border-slate-200 px-2 py-1 rounded-lg shadow-sm">
+                        <button onclick="updateQuantity(${item.id}, -1)" class="text-slate-500 hover:text-slate-900 text-xs px-1">-</button>
+                        <span class="text-xs font-bold text-slate-900">${item.quantity}</span>
+                        <button onclick="updateQuantity(${item.id}, 1)" class="text-slate-500 hover:text-slate-900 text-xs px-1">+</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleCart(forceOpen = false) {
+            const drawer = document.getElementById('cartDrawer');
+            if (forceOpen) {
+                drawer.classList.remove('translate-x-full');
+            } else {
+                drawer.classList.toggle('translate-x-full');
+            }
+        }
+
+        // ADD NEW PRODUCT LOGIC
+        function openAddProductModal() {
+            document.getElementById('addProductModal').classList.remove('hidden');
+        }
+
+        function closeAddProductModal() {
+            document.getElementById('addProductModal').classList.add('hidden');
+            tempLocalImageBase64 = '';
+        }
+
+        function previewLocalImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    tempLocalImageBase64 = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function handleAddNewProduct(e) {
+            e.preventDefault();
+            const title = document.getElementById('newTitle').value;
+            const category = document.getElementById('newCategory').value;
+            const price = parseFloat(document.getElementById('newPrice').value);
+            const originalPrice = parseFloat(document.getElementById('newOriginalPrice').value) || null;
+            const badge = document.getElementById('newBadge').value;
+            const specs = document.getElementById('newSpecs').value || "Premium Quality • Official Warranty";
+            const imageUrl = document.getElementById('newImageUrl').value;
+
+            const finalImage = tempLocalImageBase64 || imageUrl || "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80";
+
+            const newProduct = {
+                id: Date.now(),
+                title,
+                category,
+                price,
+                originalPrice,
+                badge,
+                image: finalImage,
+                specs
+            };
+
+            products.unshift(newProduct);
+            renderProducts();
+            closeAddProductModal();
+            showNotification("New product published successfully to Buy2BM store!");
+        }
+
+        // CHECKOUT LOGIC
+        function openCheckoutModal() {
+            if (cart.length === 0) {
+                showNotification("Please add at least one product to your cart first!", "error");
+                return;
+            }
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            document.getElementById('checkoutTotalText').innerText = `Rs. ${subtotal.toLocaleString()}`;
+            toggleCart(false);
+            document.getElementById('checkoutModal').classList.remove('hidden');
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkoutModal').classList.add('hidden');
+        }
+
+        function handlePlaceOrder(e) {
+            e.preventDefault();
+            showNotification("Thank you! Your Cash on Delivery order has been placed successfully.");
+            cart = [];
+            updateCartUI();
+            closeCheckoutModal();
+        }
+
+        // CONTACT FORM LOGIC
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            showNotification("Thank you for contacting Buy2BM Pakistan! We will respond within 24 hours.");
+            e.target.reset();
+        }
+
+        // CUSTOM TOAST NOTIFICATION SYSTEM
+        function showNotification(message, type = "success") {
+            const toast = document.createElement('div');
+            toast.className = `fixed bottom-5 right-5 z-50 px-5 py-3 rounded-xl text-white font-medium text-xs shadow-lg transition-all transform translate-y-full opacity-0 ${type === 'error' ? 'bg-red-600' : 'bg-slate-900 border border-slate-700'}`;
+            toast.innerHTML = `<div class="flex items-center space-x-2"><i class="fa-solid ${type === 'error' ? 'fa-circle-exclamation' : 'fa-circle-check text-emerald-400'}"></i><span>${message}</span></div>`;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.remove('translate-y-full', 'opacity-0');
+            }, 100);
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-full', 'opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 4000);
+        }
+    </script>
+</body>
+</html>
